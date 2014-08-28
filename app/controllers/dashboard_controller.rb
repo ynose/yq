@@ -5,12 +5,16 @@ class DashboardController < ApplicationController
     year = params[:year]
     year_end = (year.to_i + 1).to_s
     
-    @user = User.find_by(user_id: user_id)
+    @user = User.find(user_id)
     @paid_vacation = PaidVacation.find_by(user_id: user_id,
                                           year: year)
 
-    #指定年度の休暇リストを取得                                          
-    @vacations = Vacation.where(["user_id = ? and ? <= start_datetime and end_datetime <= ?", user_id, year + '-04-01 00:00:00', year_end + '-03-31 23:59:59']).order("start_datetime desc")
+    #指定年度の休暇リストを取得(指定年度(4月1日〜3月31日)の範囲を検索)
+    @vacations = Vacation.where(["id = ? and ? <= start_datetime and end_datetime <= ?", 
+                                user_id, 
+                                year + '-04-01 00:00:00', 
+                                year_end + '-03-31 23:59:59'])
+                                .order("start_datetime desc")
     
     seconds = 0
     @vacations.each do |vacation|

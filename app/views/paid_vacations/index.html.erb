@@ -1,0 +1,27 @@
+<h1>Listing Paid Vacation</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>UserID</th>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @paid_vacations.each do |paid_vacation| %>
+      <tr>
+        <td><%= paid_vacation.user_id %></td>
+        <td><%= paid_vacation.year %></td>
+        <td><%= link_to 'Show', paid_vacation %></td>
+        <td><%= link_to 'Edit', edit_paid_vacation_path(paid_vacation) %></td>
+        <td><%= link_to 'Destroy', paid_vacation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_paid_vacation_path %>

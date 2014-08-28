@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 #   get 'dashboard/show'
 
   resources :users
+  resources :paid_vacations
 
   root 'dashboard#index'
   get '/dashboard/'               => 'dashboard#index'

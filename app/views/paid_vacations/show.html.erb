@@ -1,0 +1,28 @@
+<% provide(:title, @paid_vacation.year.to_s) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @paid_vacation.user_id %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<p>
+  <strong>Year:</strong>
+  <%= @paid_vacation.year %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @paid_vacation.hours %>
+</p>
+
+<p>
+  <strong>Carryover Hours:</strong>
+  <%= @paid_vacation.carryover_hours %>
+</p>
+
+<%= link_to 'Edit', edit_paid_vacation_path(@paid_vacation) %> |
+<%= link_to 'Back', paid_vacations_path %>

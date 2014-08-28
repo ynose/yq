@@ -1,0 +1,28 @@
+<% provide(:title, 'New Year') %>
+<h1>New Year</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@paid_vacation) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id %>
+      <br/>
+
+      <%= f.label :year %>
+      <%= f.text_field :year %>
+      <br/>
+
+      <%= f.label :hours %>
+      <%= f.text_field :hours %>
+      <br/>
+
+      <%= f.label :carryover_hours %>
+      <%= f.text_field :carryover_hours %>
+      <br/>
+
+      <%= f.submit "Create Paid Vacation", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
