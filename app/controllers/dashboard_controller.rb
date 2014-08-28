@@ -21,5 +21,11 @@ class DashboardController < ApplicationController
     
     @hours = seconds / 60 / 60
   end
+  
+  def index
+  
+    
+  
+  end
 
 end

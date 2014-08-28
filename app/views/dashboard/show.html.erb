@@ -10,6 +10,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
+    <% if @paid_vacation != nil then %>
     <%= @paid_vacation.year %>年度<br/>
     支給:<%= @paid_vacation.hours %>h<br/>
     繰り越し:<%= @paid_vacation.carryover_hours %>h<br/>
@@ -17,6 +18,7 @@
     <br/>
     消化:<%= @hours %>h<br/>
     残り:<%= @paid_vacation.hours + @paid_vacation.carryover_hours - @hours %>h (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @hours) / 8 %>d)
+    <% end %>
   </div>
 </div>
 <br/>
