@@ -10,21 +10,17 @@ class DashboardController < ApplicationController
                                           year: year)
 
     #指定年度の休暇リストを取得(指定年度(4月1日〜3月31日)の範囲を検索)
-    @vacations = Vacation.where(["id = ? and ? <= start_datetime and end_datetime <= ?", 
+    @vacations = Vacation.where(["user_id = ? and ? <= start_datetime and end_datetime <= ?", 
                                 user_id, 
                                 year + '-04-01 00:00:00', 
                                 year_end + '-03-31 23:59:59'])
                                 .order("start_datetime desc")
     
-    seconds = 0
+    @total_hours = 0
     @vacations.each do |vacation|
-      seconds = seconds + (vacation.end_datetime - vacation.start_datetime)
-      
-      # 昼休み(12:00-13:00)をまたぐ場合は1hマイナスする
-      seconds = seconds - (1 * 60 * 60) if vacation.start_datetime.hour <= 12 and 13 <= vacation.end_datetime.hour
+      # 有休消化時間を集計する
+      @total_hours = @total_hours + vacation.hours
     end
-    
-    @hours = seconds / 60 / 60
   end
   
   def index

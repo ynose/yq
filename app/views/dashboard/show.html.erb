@@ -16,31 +16,36 @@
     繰り越し:<%= @paid_vacation.carryover_hours %>h<br/>
     合計:<%= @paid_vacation.hours + @paid_vacation.carryover_hours %>h<br/>
     <br/>
-    消化:<%= @hours %>h<br/>
-    残り:<%= @paid_vacation.hours + @paid_vacation.carryover_hours - @hours %>h (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @hours) / 8 %>d)
+    消化:<%= @total_hours %>h<br/>
+    残り:<%= @paid_vacation.hours + @paid_vacation.carryover_hours - @total_hours %>h (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @total_hours) / 8 %>d)
     <% end %>
   </div>
 </div>
 <br/>
 <br/>
 <br/>
+
+<!-- 有休消化リスト -->
 <div class="row">
   <div class="col-xs-12">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>user</th>
-          <th>start</th>
-          <th>end</th>
+          <th>date</th>
+          <th>time</th>
+          <th>hours</th>
           <th>memo</th>
           <th>fixed</th>
         </tr>
       </thead>
+      <% youbi = %w[日 月 火 水 木 金 土] %>
       <% @vacations.each do |vacation| %>
       <tr>
         <td><%= vacation.user_id %></td>
-        <td><%= vacation.start_datetime %></td>
-        <td><%= vacation.end_datetime %></td>
+        <td><%= vacation.start_datetime.strftime("%m/%d(") + youbi[vacation.start_datetime.wday] + ")" %></td>
+        <td><%= vacation.start_datetime.strftime("%H:%M") + " - " + vacation.end_datetime.strftime("%H:%M") %></td>
+        <td><%= vacation.hours %></td>
         <td><%= vacation.memo %></td>
         <td><%= vacation.fixed %></td>
       </tr>
