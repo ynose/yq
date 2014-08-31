@@ -1,0 +1,31 @@
+<% provide(:title, 'New Vacation') %>
+<h1>New Vacation</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@vacation) do |f| %>
+
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id %>
+      <br/>
+
+      <%= f.label :start_datetime %>
+      <%= f.text_field :start_datetime %>
+      <br/>
+
+      <%= f.label :end_datetime %>
+      <%= f.text_field :end_datetime %>
+      <br/>
+
+      <%= f.label :memo %>
+      <%= f.text_field :memo %>
+      <br/>
+
+      <%= f.label :fixed %>
+      <%= f.text_field :fixed %>
+      <br/>
+
+      <%= f.submit "Create Vacation", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

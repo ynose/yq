@@ -29,7 +29,7 @@
 <!-- 追加ボタン -->
 <div class="row">
   <div class="col-xs-2 col-xs-offset-10 text-right">
-    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"</span></a><br />
+    <a href="<%= new_vacation_path %>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"</span></a><br />
     <br />
   </div>
 </div>
@@ -46,7 +46,7 @@
         <td><%= vacation.hours %></td>
         <td><%= vacation.memo %></td>
         <td><%= vacation.fixed %></td>
-        <td><a href="#"><span class="glyphicon glyphicon-cog"></span></a></td>
+        <td><a href="<%= edit_vacation_path(vacation) %>"><span class="glyphicon glyphicon-cog"></span></a></td>
       </tr>
       <% end %>
     </table>

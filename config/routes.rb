@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :paid_vacations
+  resources :vacations
 
   root 'dashboard#index'
   get '/dashboard/'               => 'dashboard#index'
