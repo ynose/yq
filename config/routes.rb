@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   resources :users
   resources :paid_vacations
-  resources :vacations
+  resources :vacations, :except => [:show]  #showアクションは不要
 
   root 'dashboard#index'
-  get '/dashboard/'               => 'dashboard#index'
-  get '/dashboard/:user_id/:year' => 'dashboard#show'
+  get '/dashboard/'                   => 'dashboard#index'
+  get '/dashboard/:user_id/:year'     => 'dashboard#show'
+  get '/vacations/:id/edit/:callback' => 'vacations#edit'
+  get '/vacations/new/:user_id'       => 'vacations#new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

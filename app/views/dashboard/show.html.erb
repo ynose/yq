@@ -1,26 +1,35 @@
 <h1>Dashboard#show</h1>
 <p>Find me in app/views/dashboard/show.html.erb</p>
 
+<!-- のこり表示 -->
 <div class="row">
   <div class="col-xs-12 jumbotron">
     <% if @paid_vacation != nil then %>
+    <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
 
     <h4><%= @paid_vacation.year %><small>年度</small></h4><br/>
     <h4 class="text-center">のこり</h4>
-    <h1 class="text-center"><strong>
-    <%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @total_hours) / 8 %><small>日</small></strong>
+    <!-- 残日数 -->
+    <h1 class="text-center">
+      <strong><%= (paid_vacation_total_hours - @total_hours) / 8 %></strong><small>日</small>
     </h1>
+    <!-- 残時間 -->
     <h5 class="text-center">
-    <%= @paid_vacation.hours + @paid_vacation.carryover_hours - @total_hours %><small>時間</small>
+    <%= paid_vacation_total_hours - @total_hours %><small>時間</small>
     </h1>
     <br/>
     <br/>
-    <div class="progress">
-      <% percent = (@total_hours / (@paid_vacation.hours + @paid_vacation.carryover_hours)) * 100 %>
-      <div class="progress-bar" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%;">
-        <%= @total_hours / 8 %><small>日</small>
+    <!-- プログレスバー -->
+    <div>
+      <%= @total_hours / 8 %><small>日</small>
+      <div class="progress">
+        <% percent = (@total_hours / paid_vacation_total_hours) * 100 %>
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%;">
+          <%= percent %><small>%</small>
+        </div>
       </div>
-    </div>  
+      <%= paid_vacation_total_hours / 8 %><small>日</small>
+    </div>
     
     <% end %>
   </div>
@@ -29,7 +38,7 @@
 <!-- 追加ボタン -->
 <div class="row">
   <div class="col-xs-2 col-xs-offset-10 text-right">
-    <a href="<%= new_vacation_path %>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"</span></a><br />
+    <a href="<%= new_vacation_path + "?user_id=" + @user.id.to_s + "&callback_url=" + request.original_url%>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"</span></a><br />
     <br />
   </div>
 </div>
@@ -46,7 +55,8 @@
         <td><%= vacation.hours %></td>
         <td><%= vacation.memo %></td>
         <td><%= vacation.fixed %></td>
-        <td><a href="<%= edit_vacation_path(vacation) %>"><span class="glyphicon glyphicon-cog"></span></a></td>
+        <!-- 編集画面リンク -->
+        <td><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>"><span class="glyphicon glyphicon-cog"></span></a></td>
       </tr>
       <% end %>
     </table>

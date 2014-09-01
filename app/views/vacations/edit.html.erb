@@ -1,6 +1,9 @@
-<h1>Editing Vacation</h1>
+<% provide(:title, " 編集") %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @vacation %> |
-<%= link_to 'Back', vacations_path %>
+<%= link_to 'Destroy', vacation_path(:callback_url => params[:callback_url]), 
+                       method: :delete, data: { confirm: 'Are you sure?' },
+                       :class => "btn btn-danger" %>
+
+<%= link_to 'Back', params[:callback_url], :class => "btn btn-default" %>
