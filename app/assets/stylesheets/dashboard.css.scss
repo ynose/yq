@@ -1,3 +1,38 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.vacation {
+  display: inline-block; 
+}
+
+.vacation.month {
+  width:25px; 
+  text-align: right;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.vacation.date {
+  width:25px;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.vacation.weekday {
+  width:20px;
+  font-size: smaller;
+}
+
+.vacation.hour {
+  width:16px; 
+  text-align: right;
+}
+
+.vacation.memo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+}

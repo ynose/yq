@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :paid_vacations
-  resources :vacations, :except => [:show]  #showアクションは不要
+  resources :vacations, :except => [:index, :show]  #index,#showアクションは不要
 
   root 'dashboard#index'
   get '/dashboard/'                   => 'dashboard#index'
