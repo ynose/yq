@@ -21,21 +21,24 @@
 
     <!-- プログレスバー -->
     <div class="row">
-      <dir class="col-xs-11 col-sm-11" style="padding-right: 0">
-      
-        <div class="progress">
-          <!-- 消化率 -->
-          <% percent = (@vacation_total_hours / paid_vacation_total_hours) * 100 %>
-          <div class="progress-bar" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%;">
-            <!-- 消化日数表示 -->
-            <%= (@vacation_total_hours / 8).ceil %><small>日</small>
+
+        <div class="col-xs-11 col-sm-11">
+          
+          <div class="progress">
+            <!-- 消化率 -->
+            <% percent = (@vacation_total_hours / paid_vacation_total_hours) * 100 %>
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%;">
+              <!-- 消化日数表示 -->
+              <%= (@vacation_total_hours / 8).ceil %><small>日</small>
+            </div>
           </div>
+          
         </div>
-      </dir>
-      <dir class="col-xs-1 col-sm-1" style="padding-left: 2">
-        <!-- 支給日数表示 -->
-        <nobr><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></nobr>
-      </dir>
+        <div class="col-xs-1 col-sm-1" style="padding-left: 0">
+          <!-- 支給日数表示 -->
+          <nobr><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></nobr>
+        </div>
+
     </div>
     
   <% end %>
@@ -57,8 +60,8 @@
       <% youbi = %w[日 月 火 水 木 金 土] %>
       <% @vacations.each do |vacation| %>
       <tr>
+        <!-- 月/日 曜日 -->
         <td>
-          <!-- 月/日 曜日 -->
           <div style="white-space: nowrap;">
             <div class="vacation month">
               <%= vacation.start_datetime.strftime("%m").to_i %> /
@@ -71,9 +74,15 @@
             </div>
           </div>
         </td>
+        <!-- 消化時間 -->
         <td>
-         <!-- 時刻 -->
-          <div style="white-space: nowrap;">
+          <div>
+            <%= vacation.hours %>
+          </div>
+        </td>
+        <!-- 時刻 -->
+        <td>
+          <div class="hidden-xs" style="white-space: nowrap;">
             <div class="vacation hour">
               <%= vacation.start_datetime.strftime("%H").to_i %>
             </div><%= vacation.start_datetime.strftime(":%M") %>
@@ -83,14 +92,15 @@
             </div><%= vacation.end_datetime.strftime(":%M") %>
           </div>
         </td>
-        <td><%= vacation.hours %></td>
+        <!-- メモ -->
         <td>
           <div class="vacation memo">
             <%= vacation.memo %>
           </div>
         </td>
+        <!-- 確定 -->
         <td>
-          <div class="visible-sm-block visible-md-block visible-lg-block">
+          <div class="hidden-xs">
             <%= vacation.fixed %>
           </div>    
         </td>
