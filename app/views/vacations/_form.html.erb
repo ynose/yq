@@ -1,4 +1,4 @@
-<%= form_for(@vacation) do |f| %>
+<%= form_for(@vacation, :html => {:class => "form-horizontal", :role => "form"} ) do |f| %>
   <% if @vacation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vacation.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,28 +11,56 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id, :readonly => true %>
-  </div>
-  <div class="field">
-    <%= f.label :start_datetime %><br>
-    <%= f.text_field :start_datetime %>
-  </div>
-  <div class="field">
-    <%= f.label :end_datetime %><br>
-    <%= f.text_field :end_datetime %>
-  </div>
-  <div class="field">
-    <%= f.label :memo %><br>
-    <%= f.text_field :memo %>
-  </div>
-  <div class="field">
-    <%= f.label :fixed %><br>
-    <%= f.check_box :fixed %>
-  </div>
-  <div class="field">
+<div class="row">
+  <div class="col-sm-12">
+  
+    <div class="form-group">
+      <%= f.label :user_id, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :user_id, :readonly => true, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+    <%= f.label :start_datetime, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :start_datetime, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :end_datetime, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :end_datetime, :class => "form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :memo, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :memo, :class => "form-control" %>
+      </div>
+    </div>
+  
+    <div class="col-sm-12">
+      <div class="form-group">
+        <div class="checkbox input-lg">
+          <label>
+            <%= f.check_box :fixed %>
+            確定
+          </label>
+        </div>
+      </div>
+    </div>
+  
     <input type="hidden" name="callback_url" value="<%= params[:callback_url] %>" />
+    
+    <div class="col-sm-12">
+      <%= f.submit :class => "btn btn-primary btn-block"%>
+    </div>
+  
   </div>
-  <%= f.submit :class => "btn btn-primary"%>
+</div>
+
+<br>
 <% end %>
