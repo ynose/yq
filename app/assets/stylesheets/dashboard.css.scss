@@ -36,3 +36,22 @@
   white-space: nowrap;
   max-width: 150px;
 }
+
+#firstitem {
+	width: 100%;
+	position: relative; /* IE6・7の overflowバグ回避 */
+	overflow: auto;     /* JavaScript無効時にスクロール表示させたいから */
+}
+
+#firstitem ul {
+	display: block;
+	width: 200%;
+	margin: 0;
+	padding: 0;
+}
+
+#firstitem ul li {
+	float: left;
+	list-style-type: none;
+	width: 50%;
+}

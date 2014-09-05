@@ -1,6 +1,12 @@
+
+
 <!-- のこり表示 -->
 <div class="row">
   <div class="col-xs-12 jumbotron">
+  
+<div id="firstitem" class="flickSimple">
+<ul>
+<li>
   <% if @paid_vacation != nil then %>
     <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
 
@@ -22,7 +28,7 @@
     <!-- プログレスバー -->
     <div class="row">
 
-        <div class="col-xs-11 col-sm-11">
+        <div class="col-xs-10 col-sm-11">
           
           <div class="progress">
             <!-- 消化率 -->
@@ -34,7 +40,7 @@
           </div>
           
         </div>
-        <div class="col-xs-1 col-sm-1" style="padding-left: 0">
+        <div class="col-xs-2 col-sm-1" style="padding-left: 0">
           <!-- 支給日数表示 -->
           <nobr><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></nobr>
         </div>
@@ -42,8 +48,51 @@
     </div>
     
   <% end %>
+
+</li>
+
+<li>
+<div class="row">
+  <div class="col-xs-12">
+    <br/>
+    <br/>
+    <br/>
+  </div>    
+  
+  <div class="col-xs-12">
+    <%= @user.id %>
+    <%= @user.name %>
+    <%= @user.email %>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% if @paid_vacation != nil then %>
+    <%= @paid_vacation.year %>年度<br/>
+    支給:<%= @paid_vacation.hours %>h<br/>
+    繰り越し:<%= @paid_vacation.carryover_hours %>h<br/>
+    合計:<%= @paid_vacation.hours + @paid_vacation.carryover_hours %>h<br/>
+    <br/>
+    消化:<%= @vacation_total_hours %>h<br/>
+    残り:<%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %>h (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours) / 8 %>d)
+    <br/>
+    <% end %>
+  </div>    
+</div>
+</li>
+</ul>
+</div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+	$('#firstitem').flickSimple({
+		snap: "first"
+	});
+</script>
+
 
 <!-- 追加ボタン -->
 <div class="row">
@@ -112,31 +161,3 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <br/>
-    <br/>
-    <br/>
-  </div>    
-  
-  <div class="col-xs-12">
-    <%= @user.id %>
-    <%= @user.name %>
-    <%= @user.email %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <% if @paid_vacation != nil then %>
-    <%= @paid_vacation.year %>年度<br/>
-    支給:<%= @paid_vacation.hours %>h<br/>
-    繰り越し:<%= @paid_vacation.carryover_hours %>h<br/>
-    合計:<%= @paid_vacation.hours + @paid_vacation.carryover_hours %>h<br/>
-    <br/>
-    消化:<%= @vacation_total_hours %>h<br/>
-    残り:<%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %>h (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours) / 8 %>d)
-    <br/>
-    <% end %>
-  </div>    
-</div>
