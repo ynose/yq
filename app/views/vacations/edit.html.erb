@@ -1,5 +1,6 @@
-<% provide(:title, " 編集") %>
+<% provide(:title, "編集") %>
 
+<div class="container-fluid">
 <%= render 'form' %>
 
 <%= link_to 'Destroy', vacation_path(:callback_url => params[:callback_url]), 
@@ -7,3 +8,4 @@
                        :class => "btn btn-danger" %>
 
 <%= link_to 'Back', params[:callback_url], :class => "btn btn-default" %>
+</div>

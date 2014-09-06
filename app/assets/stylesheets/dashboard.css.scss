@@ -37,21 +37,37 @@
   max-width: 150px;
 }
 
-#firstitem {
+#flick {
 	width: 100%;
 	position: relative; /* IE6・7の overflowバグ回避 */
 	overflow: auto;     /* JavaScript無効時にスクロール表示させたいから */
 }
 
-#firstitem ul {
+#flick ul {
 	display: block;
 	width: 200%;
 	margin: 0;
 	padding: 0;
 }
 
-#firstitem ul li {
+#flick ul li {
 	float: left;
 	list-style-type: none;
 	width: 50%;
+}
+
+.indicator {
+	position: relative;
+	overflow: hidden;
+	width: 13px;
+	height: 5px;
+	background: url(/assets/indicator_bg.png) repeat-x left top;
+	margin: 10px auto 0 auto;
+}
+
+.indicator img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 0;
 }

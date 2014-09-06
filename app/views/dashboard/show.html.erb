@@ -1,12 +1,14 @@
+<div class="container-fluid" style="padding: 0">
 
+<div id="flick" class="flickSimple">
+<ul>
+
+<!-- １ページ -->
+<li>
 
 <!-- のこり表示 -->
 <div class="row">
-  <div class="col-xs-12 jumbotron">
-  
-<div id="firstitem" class="flickSimple">
-<ul>
-<li>
+  <div class="jumbotron" style="height: 350px">
   <% if @paid_vacation != nil then %>
     <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
 
@@ -28,7 +30,7 @@
     <!-- プログレスバー -->
     <div class="row">
 
-        <div class="col-xs-10 col-sm-11">
+        <div class="col-xs-11 col-sm-11">
           
           <div class="progress">
             <!-- 消化率 -->
@@ -40,7 +42,7 @@
           </div>
           
         </div>
-        <div class="col-xs-2 col-sm-1" style="padding-left: 0">
+        <div class="col-xs-1 col-sm-1" style="padding-left: 0">
           <!-- 支給日数表示 -->
           <nobr><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></nobr>
         </div>
@@ -49,115 +51,153 @@
     
   <% end %>
 
+  </div>
+</div>
+
 </li>
 
+
+<!-- ２ページ -->
 <li>
 <div class="row">
-  <div class="col-xs-12">
-    <br/>
-    <br/>
-    <br/>
-  </div>    
+  <div class="jumbotron" style="height: 350px">
+
+    <h4><%= @paid_vacation.year %><small>年度</small></h4><br/>
+
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <%= @user.id %>
+        <%= @user.name %>
+        <%= @user.email %>
+        <br />
+        <br />
+        <% if @paid_vacation != nil then %>
+        支給: <%= @paid_vacation.hours %><small>時間</small><br/>
+        繰り越し: <%= @paid_vacation.carryover_hours %><small>時間</small><br/>
+        合計: <%= @paid_vacation.hours + @paid_vacation.carryover_hours %><small>時間</small><br/>
+        <br/>
+        消化: <%= @vacation_total_hours %><small>時間</small><br/>
+        残り: <%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %><small>時間</small> (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours) / 8 %><small>日</small>)
+        <br/>
+        <% end %>
+      </div>    
+    </div>
   
-  <div class="col-xs-12">
-    <%= @user.id %>
-    <%= @user.name %>
-    <%= @user.email %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <% if @paid_vacation != nil then %>
-    <%= @paid_vacation.year %>年度<br/>
-    支給:<%= @paid_vacation.hours %>h<br/>
-    繰り越し:<%= @paid_vacation.carryover_hours %>h<br/>
-    合計:<%= @paid_vacation.hours + @paid_vacation.carryover_hours %>h<br/>
-    <br/>
-    消化:<%= @vacation_total_hours %>h<br/>
-    残り:<%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %>h (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours) / 8 %>d)
-    <br/>
-    <% end %>
-  </div>    
-</div>
 </li>
 </ul>
+
+<!-- フリックインジケーター -->
+<div id="indicator1" class="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
+
 </div>
 
-  </div>
-</div>
 
+<!-- フリック動作用JavaScript -->
 <script type="text/javascript">
-	$('#firstitem').flickSimple({
-		snap: "first"
+(function(){
+	var fl = $('#flick');
+	var indelm = $('#indicator1');
+	var indimg = indelm.find('img');
+
+	fl.flickSimple({
+		snap: 'first',
+		onResize: function() {
+			// update indicator
+			indelm.css( { width: (this.pageLength * 13) + 'px' } );
+		},
+		onChange: function() {
+			// move indicator
+			var pos = (this.page -1) * 13;
+			if ( this.android || ! this.webkit ) {
+				indimg.css( { left: pos +'px' } );
+			} else {
+				indimg.css( { webkitTransform:'translate3d('+ pos +'px,0,0)' } );
+			}
+		},
+		onClick: function(elm) {
+			elm.fadeOut('fast').fadeIn('fast').fadeOut('fast').fadeIn('fast');
+		}
 	});
+
+})();
 </script>
 
 
-<!-- 追加ボタン -->
-<div class="row">
-  <div class="col-xs-2 col-xs-offset-10 text-right">
-    <a href="<%= new_vacation_path + "?user_id=" + @user.id.to_s + "&callback_url=" + request.original_url%>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"</span></a><br />
-    <br />
-  </div>
-</div>
 
-<!-- 消化有休リスト -->
-<div class="row">
+<div class="row" style="padding: 15px">
   <div class="col-xs-12">
-    <table class="table table-striped table-hover">
-      <% youbi = %w[日 月 火 水 木 金 土] %>
-      <% @vacations.each do |vacation| %>
-      <tr>
-        <!-- 月/日 曜日 -->
-        <td>
-          <div style="white-space: nowrap;">
-            <div class="vacation month">
-              <%= vacation.start_datetime.strftime("%m").to_i %> /
-            </div>
-            <div class="vacation date">
-              <strong><%= vacation.start_datetime.strftime("%d").to_i %></strong>
-            </div>
-            <div class="vacation weekday">
-              <%= youbi[vacation.start_datetime.wday] + "" %>
-            </div>
-          </div>
-        </td>
-        <!-- 消化時間 -->
-        <td>
-          <div>
-            <%= vacation.hours %>
-          </div>
-        </td>
-        <!-- 時刻 -->
-        <td>
-          <div class="hidden-xs" style="white-space: nowrap;">
-            <div class="vacation hour">
-              <%= vacation.start_datetime.strftime("%H").to_i %>
-            </div><%= vacation.start_datetime.strftime(":%M") %>
-              -
-            <div class="vacation hour">
-              <%= vacation.end_datetime.strftime("%H").to_i %>
-            </div><%= vacation.end_datetime.strftime(":%M") %>
-          </div>
-        </td>
-        <!-- メモ -->
-        <td>
-          <div class="vacation memo">
-            <%= vacation.memo %>
-          </div>
-        </td>
-        <!-- 確定 -->
-        <td>
-          <div class="hidden-xs">
-            <%= vacation.fixed %>
-          </div>    
-        </td>
-        <!-- 編集画面リンク -->
-        <td><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>"><span class="glyphicon glyphicon-cog"></span></a></td>
-      </tr>
-      <% end %>
-    </table>
+
+    <!-- 追加ボタン -->
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-10 text-right">
+        <a href="<%= new_vacation_path + "?user_id=" + @user.id.to_s + "&callback_url=" + request.original_url%>" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"</span></a><br />
+        <br />
+      </div>
+    </div>
+    
+    <!-- 消化有休リスト -->
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-striped table-hover">
+          <% youbi = %w[日 月 火 水 木 金 土] %>
+          <% @vacations.each do |vacation| %>
+          <tr>
+            <!-- 月/日 曜日 -->
+            <td>
+              <div style="white-space: nowrap;">
+                <div class="vacation month">
+                  <%= vacation.start_datetime.strftime("%m").to_i %> /
+                </div>
+                <div class="vacation date">
+                  <strong><%= vacation.start_datetime.strftime("%d").to_i %></strong>
+                </div>
+                <div class="vacation weekday">
+                  <%= youbi[vacation.start_datetime.wday] + "" %>
+                </div>
+              </div>
+            </td>
+            <!-- 消化時間 -->
+            <td>
+              <div>
+                <%= vacation.hours %>
+              </div>
+            </td>
+            <!-- 時刻 -->
+            <td>
+              <div class="hidden-xs" style="white-space: nowrap;">
+                <div class="vacation hour">
+                  <%= vacation.start_datetime.strftime("%H").to_i %>
+                </div><%= vacation.start_datetime.strftime(":%M") %>
+                  -
+                <div class="vacation hour">
+                  <%= vacation.end_datetime.strftime("%H").to_i %>
+                </div><%= vacation.end_datetime.strftime(":%M") %>
+              </div>
+            </td>
+            <!-- メモ -->
+            <td>
+              <div class="vacation memo">
+                <%= vacation.memo %>
+              </div>
+            </td>
+            <!-- 確定 -->
+            <td>
+              <div class="hidden-xs">
+                <%= vacation.fixed %>
+              </div>    
+            </td>
+            <!-- 編集画面リンク -->
+            <td><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>"><span class="glyphicon glyphicon-cog"></span></a></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
+</div>
