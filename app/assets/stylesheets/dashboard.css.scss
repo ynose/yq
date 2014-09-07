@@ -41,13 +41,14 @@
 	width: 100%;
 	position: relative; /* IE6・7の overflowバグ回避 */
 	overflow: auto;     /* JavaScript無効時にスクロール表示させたいから */
+	padding: 15px;
 }
 
 #flick ul {
 	display: block;
 	width: 200%;
 	margin: 0;
-	padding: 0;
+	padding: 0px 15px 0px 15px;
 }
 
 #flick ul li {
@@ -61,8 +62,8 @@
 	overflow: hidden;
 	width: 13px;
 	height: 5px;
-	background: url(/assets/indicator_bg.png) repeat-x left top;
-	margin: 10px auto 0 auto;
+	background-image: image-url("indicator_bg.png") repeat-x left top;
+	margin: 0 auto 15px auto;
 }
 
 .indicator img {
