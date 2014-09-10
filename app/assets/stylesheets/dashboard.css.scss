@@ -9,15 +9,19 @@
 .vacation.month {
   width:25px; 
   text-align: right;
-  font-size: smaller;
-  font-weight: bold;
+  font:{
+    size: smaller;
+    weight: bold;
+  }
 }
 
 .vacation.date {
   width:25px;
   text-align: center;
-  font-size: large;
-  font-weight: bold;
+  font:{
+    size: large;
+    weight: bold;
+  }
 }
 
 .vacation.weekday {
@@ -37,37 +41,37 @@
   max-width: 150px;
 }
 
+
+$pages:4; /* flicksimple.js用ページ数 */
+
 #flick {
 	width: 100%;
 	position: relative; /* IE6・7の overflowバグ回避 */
 	overflow: auto;     /* JavaScript無効時にスクロール表示させたいから */
+  ul {
+  	display: block;
+  	width: 100% * $pages;     /* ページ数 × 100% */
+  	margin: 0;
+  	padding: 0;
+    li {
+      float: left;
+      list-style-type: none;
+      width: 100% / $pages;   /* 100% ÷ ページ数 */
+      }
+    }
 }
 
-#flick ul {
-	display: block;
-	width: 200%;
-	margin: 0;
-	padding: 0;
-}
-
-#flick ul li {
-	float: left;
-	list-style-type: none;
-	width: 50%;
-}
-
-.indicator {
+#indicator {
 	position: relative;
 	overflow: hidden;
 	width: 13px;
 	height: 5px;
-	background-image: image-url("indicator_bg.png") repeat-x left top;
-	margin: 0 auto 15px auto;
-}
-
-.indicator img {
-	position: absolute;
-	left: 0;
-	top: 0;
-	margin: 0;
+	background: image-url("indicator_bg.png") repeat-x left top;
+	margin: 10px auto 0 auto;
+  img {
+	  position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    }
 }

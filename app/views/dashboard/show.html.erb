@@ -54,7 +54,15 @@
           </div>
         </div>
       </li>
-  
+    
+      <!-- 2ページ -->
+      <li>
+        <div class="row">
+          <div class="col-xs-12">
+          &nbsp;&nbsp;2page
+          </div>
+        </div>
+      </li>  
   
       <!-- 3ページ -->
       <li>
@@ -79,6 +87,16 @@
         </div>
       
       </li>
+
+      <!-- 4ページ -->
+      <li>
+        <div class="row">
+          <div class="col-xs-12">
+          &nbsp;&nbsp;4page
+          </div>
+        </div>
+      </li>  
+  
     
       </ul>
 
@@ -86,7 +104,7 @@
    <% end %>
 
     <!-- ページインジケーター -->
-    <div id="indicator1" class="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
+    <div id="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
 
   </div>
 </div>
@@ -97,7 +115,7 @@
 <script type="text/javascript">
 (function(){
 	var fl = $('#flick');
-	var indelm = $('#indicator1');
+	var indelm = $('#indicator');
 	var indimg = indelm.find('img');
 
 	fl.flickSimple({
