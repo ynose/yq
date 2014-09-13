@@ -20,9 +20,13 @@ class DashboardController < ApplicationController
                                 .order("start_datetime desc")
     
     @vacation_total_hours = 0
+    @vacationHourOfMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     @vacations.each do |vacation|
-      # 有休消化時間を集計する
-      @vacation_total_hours = @vacation_total_hours + vacation.hours
+      # 年間の有休消化時間を集計する
+      @vacation_total_hours += vacation.hours
+      
+      # 月ごとの有休消化時間を集計する
+      @vacationHourOfMonth[vacation.start_datetime.strftime("%m").to_i] += vacation.hours
     end
   end
   
