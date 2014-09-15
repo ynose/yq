@@ -16,4 +16,5 @@
 //= require_tree .
 
 // 追加
+//= require bootstrap.min.js
 //= require jquery.flicksimple

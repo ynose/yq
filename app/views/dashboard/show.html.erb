@@ -310,7 +310,7 @@
               </div>    
             </td>
             <!-- 編集画面リンク -->
-            <td><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>"><span class="glyphicon glyphicon-cog"></span></a></td>
+            <td class="text-right"><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></a></td>
           </tr>
           <% end %>
         </table>

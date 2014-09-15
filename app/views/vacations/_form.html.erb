@@ -52,13 +52,11 @@
     </div>
   
     <div class="col-sm-12">
-      <div class="form-group">
-        <div class="checkbox input-lg">
-          <label>
+      <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default <%= 'active' if @vacation.fixed %>">
             <%= f.check_box :fixed %>
             確定
           </label>
-        </div>
       </div>
     </div>
   
