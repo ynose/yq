@@ -1,0 +1,43 @@
+<!-- のこり表示 -->
+<div class="row">
+  <div class="col-xs-12">
+
+    <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
+
+    <!-- のこり日数(時間を日数に換算) -->
+    <h4 class="text-center">のこり</h4>
+    <h1 class="text-center">
+      &nbsp;&nbsp;<strong><%= ((paid_vacation_total_hours - @vacation_total_hours) / 8).to_i %></strong><small>日</small>
+    </h1>
+    
+    <!-- のこり時間 -->
+    <h5 class="text-center">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= paid_vacation_total_hours - @vacation_total_hours %><small>時間</small>
+    </h5>
+    <br/>
+    <br/>
+
+    <!-- プログレスバー -->
+    <div class="row">
+
+        <div class="col-xs-9 col-xs-offset-1">
+          
+          <div class="progress">
+            <!-- 消化率 -->
+            <% percent = (@vacation_total_hours / paid_vacation_total_hours) * 100 %>
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%;">
+              <!-- 消化日数表示 -->
+              <%= (@vacation_total_hours / 8).ceil %><small>日</small>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-xs-1" style="padding-left: 0">
+          <!-- 支給日数表示 -->
+          <nobr><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></nobr>
+        </div>
+
+    </div>
+
+  </div>
+</div>

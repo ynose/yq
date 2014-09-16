@@ -1,0 +1,19 @@
+<!-- 詳細表示 -->
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-2">
+    <%= @user.id %>
+    <%= @user.name %>
+    <%= @user.email %>
+    <br />
+    <br />
+    <% if @paid_vacation != nil then %>
+    支給: <%= @paid_vacation.hours %><small>時間</small><br/>
+    繰り越し: <%= @paid_vacation.carryover_hours %><small>時間</small><br/>
+    合計: <%= @paid_vacation.hours + @paid_vacation.carryover_hours %><small>時間</small><br/>
+    <br/>
+    消化: <%= @vacation_total_hours %><small>時間</small><br/>
+    残り: <%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %><small>時間</small> (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours) / 8 %><small>日</small>)
+    <br/>
+    <% end %>
+  </div>    
+</div>

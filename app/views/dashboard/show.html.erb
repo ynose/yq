@@ -9,181 +9,18 @@
       
       <!-- 2ページ -->
       <li>
-        <div class="row">
-          <div class="col-xs-12" style="padding: 0 40px 0 40px">
-            <div class="row">
-            
-              <div class="col-xs-1">
-                <div class="col-xs-12" style="background-color: blue, height: <%= @vacationHourOfMonth[4] %>px"></div>
-                <%= sprintf("%g", @vacationHourOfMonth[4]) if @vacationHourOfMonth[4] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[5] if @vacationHourOfMonth[5] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[6] if @vacationHourOfMonth[6] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[7] if @vacationHourOfMonth[7] > 0 %>
-              </div>
-              <div class="col-xs-1">
-              <div class="row">
-                <div class="col-xs-12" style="vertical-align: bottom;">
-                  <%= sprintf("%g", @vacationHourOfMonth[9]) if @vacationHourOfMonth[9] > 0 %>
-                </div>
-                <div class="col-xs-12" style="vertical-align: bottom;">
-                  <%= sprintf("%g", @vacationHourOfMonth[9]) if @vacationHourOfMonth[9] > 0 %>
-                </div>
-                <div class="col-xs-12" style="display: block; background-color: #0000f0; height: <%= @vacationHourOfMonth[8] %>px">
-                </div>
-              </div>
-              </div>
-              <div class="col-xs-1">
-              <div class="row">
-                <div class="col-xs-12" style="vertical-align: bottom;">
-                  <%= sprintf("%g", @vacationHourOfMonth[9]) if @vacationHourOfMonth[9] > 0 %>
-                </div>
-                <div class="col-xs-12" style="vertical-align: bottom;">
-                  <%= sprintf("%g", @vacationHourOfMonth[9]) if @vacationHourOfMonth[9] > 0 %>
-                </div>
-                <div class="col-xs-12" style="vertical-align: bottom; background-color: #0000f0; height: <%= @vacationHourOfMonth[9] %>px">
-                </div>
-              </div>
-              </div>
-              <div class="col-xs-1" style="vertical-align: bottom;">
-                <%= sprintf("%g", @vacationHourOfMonth[10]) if @vacationHourOfMonth[10] > 0 %>
-                <div class="col-xs-12" style="display: block; background-color: #0000f0; height: <%= @vacationHourOfMonth[10] %>px">
-                </div>                
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[11] if @vacationHourOfMonth[11] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[12] if @vacationHourOfMonth[12] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[1] if @vacationHourOfMonth[1] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[2] if @vacationHourOfMonth[2] > 0 %>
-              </div>
-              <div class="col-xs-1">
-                <%= @vacationHourOfMonth[3] if @vacationHourOfMonth[3] > 0 %>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-1">
-                4
-              </div>
-              <div class="col-xs-1">
-                5
-              </div>
-              <div class="col-xs-1">
-                6
-              </div>
-              <div class="col-xs-1">
-                7
-              </div>
-              <div class="col-xs-1">
-                8
-              </div>
-              <div class="col-xs-1">
-                9
-              </div>
-              <div class="col-xs-1">
-                10
-              </div>
-              <div class="col-xs-1">
-                11
-              </div>
-              <div class="col-xs-1">
-                12
-              </div>
-              <div class="col-xs-1">
-                1
-              </div>
-              <div class="col-xs-1">
-                2
-              </div>
-              <div class="col-xs-1">
-                3
-              </div>
-            </div>
-          </div>
-        </div>
+        <%= render 'bymonth' %>
       </li>  
   
       
       <!-- 1ページ -->
       <li>
-        <!-- のこり表示 -->
-        <div class="row">
-          <div class="col-xs-12">
- 
-            <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
-        
-            <!-- のこり日数(時間を日数に換算) -->
-            <h4 class="text-center">のこり</h4>
-            <h1 class="text-center">
-              &nbsp;&nbsp;<strong><%= ((paid_vacation_total_hours - @vacation_total_hours) / 8).to_i %></strong><small>日</small>
-            </h1>
-            
-            <!-- のこり時間 -->
-            <h5 class="text-center">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= paid_vacation_total_hours - @vacation_total_hours %><small>時間</small>
-            </h5>
-            <br/>
-            <br/>
-        
-            <!-- プログレスバー -->
-            <div class="row">
-        
-                <div class="col-xs-9 col-xs-offset-1">
-                  
-                  <div class="progress">
-                    <!-- 消化率 -->
-                    <% percent = (@vacation_total_hours / paid_vacation_total_hours) * 100 %>
-                    <div class="progress-bar" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%;">
-                      <!-- 消化日数表示 -->
-                      <%= (@vacation_total_hours / 8).ceil %><small>日</small>
-                    </div>
-                  </div>
-                  
-                </div>
-                <div class="col-xs-1" style="padding-left: 0">
-                  <!-- 支給日数表示 -->
-                  <nobr><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></nobr>
-                </div>
-        
-            </div>
-        
-          </div>
-        </div>
+        <%= render 'remain' %>
       </li>
     
       <!-- 3ページ -->
       <li>
-        <!-- 詳細表示 -->
-        <div class="row">
-          <div class="col-xs-6 col-xs-offset-2">
-            <%= @user.id %>
-            <%= @user.name %>
-            <%= @user.email %>
-            <br />
-            <br />
-            <% if @paid_vacation != nil then %>
-            支給: <%= @paid_vacation.hours %><small>時間</small><br/>
-            繰り越し: <%= @paid_vacation.carryover_hours %><small>時間</small><br/>
-            合計: <%= @paid_vacation.hours + @paid_vacation.carryover_hours %><small>時間</small><br/>
-            <br/>
-            消化: <%= @vacation_total_hours %><small>時間</small><br/>
-            残り: <%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %><small>時間</small> (<%= (@paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours) / 8 %><small>日</small>)
-            <br/>
-            <% end %>
-          </div>    
-        </div>
-      
+        <%= render 'detail' %>
       </li>
 
       <!-- 4ページ -->
