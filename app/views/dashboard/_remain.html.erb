@@ -41,3 +41,22 @@
 
   </div>
 </div>
+
+<!-- 月別表示 -->
+<div class="row">
+  <div class="col-xs-12" style="padding: 0 40px 0 40px">
+
+    <div class="row bymonth hour">
+      <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
+      <div class="col-xs-1"><%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %></div>
+      <% end %>
+    </div>
+
+    <div class="row bymonth">
+      <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
+      <div class="col-xs-1"><%= m %></div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

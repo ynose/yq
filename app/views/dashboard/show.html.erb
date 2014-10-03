@@ -7,31 +7,18 @@
     <div id="flick">
       <ul>
       
-      <!-- 2ページ -->
-      <li>
-        <%= render 'bymonth' %>
-      </li>  
-  
+      <!-- ページ数はdashboard.css.scssの$pagesで指定
+        ページ数は偶数にすること。奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない -->
       
       <!-- 1ページ -->
       <li>
         <%= render 'remain' %>
       </li>
     
-      <!-- 3ページ -->
+      <!-- 2ページ -->
       <li>
         <%= render 'detail' %>
       </li>
-
-      <!-- 4ページ -->
-      <li>
-        <div class="row">
-          <div class="col-xs-12">
-          &nbsp;&nbsp;4page
-          </div>
-        </div>
-      </li>  
-  
     
       </ul>
 
