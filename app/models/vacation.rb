@@ -1,8 +1,8 @@
 class Vacation < ActiveRecord::Base
   belongs_to :user
   
+  # 有休消化時間を集計する
   def hours
-      # 有休消化時間を集計する
       seconds = 0
       seconds = seconds + (end_datetime - start_datetime)
       
@@ -14,3 +14,17 @@ class Vacation < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: vacations
+#
+#  id             :integer          not null, primary key
+#  user_id        :integer
+#  start_datetime :datetime
+#  end_datetime   :datetime
+#  memo           :text
+#  fixed          :boolean
+#  created_at     :datetime
+#  updated_at     :datetime
+#

@@ -66,3 +66,35 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
+# == Route Map
+#
+#             Prefix Verb   URI Pattern                             Controller#Action
+#              users GET    /users(.:format)                        users#index
+#                    POST   /users(.:format)                        users#create
+#           new_user GET    /users/new(.:format)                    users#new
+#          edit_user GET    /users/:id/edit(.:format)               users#edit
+#               user GET    /users/:id(.:format)                    users#show
+#                    PATCH  /users/:id(.:format)                    users#update
+#                    PUT    /users/:id(.:format)                    users#update
+#                    DELETE /users/:id(.:format)                    users#destroy
+#     paid_vacations GET    /paid_vacations(.:format)               paid_vacations#index
+#                    POST   /paid_vacations(.:format)               paid_vacations#create
+#  new_paid_vacation GET    /paid_vacations/new(.:format)           paid_vacations#new
+# edit_paid_vacation GET    /paid_vacations/:id/edit(.:format)      paid_vacations#edit
+#      paid_vacation GET    /paid_vacations/:id(.:format)           paid_vacations#show
+#                    PATCH  /paid_vacations/:id(.:format)           paid_vacations#update
+#                    PUT    /paid_vacations/:id(.:format)           paid_vacations#update
+#                    DELETE /paid_vacations/:id(.:format)           paid_vacations#destroy
+#          vacations POST   /vacations(.:format)                    vacations#create
+#       new_vacation GET    /vacations/new(.:format)                vacations#new
+#      edit_vacation GET    /vacations/:id/edit(.:format)           vacations#edit
+#           vacation PATCH  /vacations/:id(.:format)                vacations#update
+#                    PUT    /vacations/:id(.:format)                vacations#update
+#                    DELETE /vacations/:id(.:format)                vacations#destroy
+#               root GET    /                                       dashboard#index
+#          dashboard GET    /dashboard(.:format)                    dashboard#index
+#                    GET    /dashboard/:user_id/:year(.:format)     dashboard#show
+#                    GET    /vacations/:id/edit/:callback(.:format) vacations#edit
+#                    GET    /vacations/new/:user_id(.:format)       vacations#new
+#
