@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
 end
 
-#データ作成
-#user = User.new(:id => 131, :name => "ynose", :email => "yuq@example.com")
-#user.save
+#Create New Data
+#u = User.create(:id => 999, :name => "example", :email => "yuq@example.com")
+
 
 # == Schema Information
 #
