@@ -71,13 +71,13 @@
 
     <div class="row bymonth hour">
       <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
-      <div class="col-xs-1"><%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %></div>
+      <div class="col-xs-1 nopadding"><%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %></div>
       <% end %>
     </div>
 
     <div class="row bymonth">
       <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
-      <div class="col-xs-1"><%= m %></div>
+      <div class="col-xs-1 nopadding"><%= m %></div>
       <% end %>
     </div>
 
