@@ -48,18 +48,18 @@ $pages:2;
 }
 
 
-
 // 月間サマリーグラフ
-.bymonth {
+#bymonth {
   text-align: center;
   font:{
     size: smaller;
   }  
 }
-.bymonth.hour {
+#bymonth .hour {
   font:{
     weight: bold;
-  }  
+  }
+  display: none;  /* デフォルト非表示でクリックすると表示 */
 }
 
 // colのpaddingとmarginを削除する
