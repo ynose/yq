@@ -1,72 +1,25 @@
-<!-- 月別表示 -->
-<div class="row" style="padding: 0;">
-<!--
-  <div class="col-xs-12" style="padding: 0 40px 0 40px">
-    <div class="row">
--->
-    
-      <!-- ４月 -->
-      <div class="col-xs-1">
-        <div style="background-color: blue, height: <%= @vacationHourOfMonth[4] %>px"></div>
-        <%= sprintf("%g", @vacationHourOfMonth[4]) if @vacationHourOfMonth[4] > 0 %>
-      </div>
-      <!-- ５月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[5] if @vacationHourOfMonth[5] > 0 %>
-      </div>
-      <!-- ６月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[6] if @vacationHourOfMonth[6] > 0 %>
-      </div>
-      <!-- ７月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[7] if @vacationHourOfMonth[7] > 0 %>
-      </div>
-      <!-- ８月 -->
-      <div class="col-xs-1">
-        <%= sprintf("%g", @vacationHourOfMonth[8]) if @vacationHourOfMonth[8] > 0 %>
-      </div>
-      <!-- ９月 -->
-      <div class="col-xs-1">
-        <%= sprintf("%g", @vacationHourOfMonth[9]) if @vacationHourOfMonth[9] > 0 %>
-      </div>
-      <!-- １０月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[10] if @vacationHourOfMonth[10] > 0 %>
-      </div>
-      <!-- １１月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[11] if @vacationHourOfMonth[11] > 0 %>
-      </div>
-      <!-- １２月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[12] if @vacationHourOfMonth[12] > 0 %>
-      </div>
-      <!-- １月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[1] if @vacationHourOfMonth[1] > 0 %>
-      </div>
-      <!-- ２月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[2] if @vacationHourOfMonth[2] > 0 %>
-      </div>
-      <!-- ３月 -->
-      <div class="col-xs-1">
-        <%= @vacationHourOfMonth[3] if @vacationHourOfMonth[3] > 0 %>
-      </div>
-</div>
-
+<!-- 月間サマリーグラフ -->
 <div class="row">
-  <div class="col-xs-1" style="padding: 1;">4</div>
-  <div class="col-xs-1" style="padding: 1;">5</div>
-  <div class="col-xs-1" style="padding: 1;">6</div>
-  <div class="col-xs-1" style="padding: 1;">7</div>
-  <div class="col-xs-1" style="padding: 1;">8</div>
-  <div class="col-xs-1" style="padding: 1;">9</div>
-  <div class="col-xs-1" style="padding: 1;">10</div>
-  <div class="col-xs-1" style="padding: 1;">11</div>
-  <div class="col-xs-1" style="padding: 1;">12</div>
-  <div class="col-xs-1" style="padding: 1;">1</div>
-  <div class="col-xs-1" style="padding: 1;">2</div>
-  <div class="col-xs-1" style="padding: 1;">3</div>
+  <div class="col-xs-12">
+
+    <div class="row bymonth hour">
+      <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
+      <div class="col-xs-1 nopadding">
+        <div class="outer">
+          <div class="vertical_bottom">
+            <%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %>
+            <p class"inner" style="background: linear-gradient(#66d, #99f); margin: 0 auto 0 auto; width: 80%; height: <%= @vacationHourOfMonth[m] %>px;"></p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="row bymonth">
+      <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
+      <div class="col-xs-1 nopadding"><%= m %></div>
+      <% end %>
+    </div>
+
+  </div>
 </div>

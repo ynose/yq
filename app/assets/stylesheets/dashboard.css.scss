@@ -4,8 +4,8 @@
 
 #dashboard {
   padding: 15px 0 15px 0;
-  margin: 0px 0px 15px 0px;
-  height: 350px; // ページ部分の高さを変える場合はここで指定する
+  margin: 0;
+  height: 320px; // ページ部分の高さを変える場合はここで指定する
   background-color: #f0f0f0;
 }
 
@@ -31,6 +31,25 @@ $pages:2;
     }
 }
 
+// ページインジケータ
+#indicator {
+  position: relative;
+  overflow: hidden;
+  width: 13px;
+  height: 5px;
+  background: image-url("indicator_bg.png") repeat-x left top;
+  margin: 20px auto 0 auto;
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    }
+}
+
+
+
+// 月間サマリーグラフ
 .bymonth {
   text-align: center;
   font:{
@@ -49,21 +68,41 @@ $pages:2;
    margin: 0 !important;
 }
 
-// ページインジケータ
-#indicator {
-	position: relative;
-	overflow: hidden;
-	width: 13px;
-	height: 5px;
-	background: image-url("indicator_bg.png") repeat-x left top;
-	margin: 20px auto 0 auto;
-  img {
-	  position: absolute;
-    left: 0;
-    top: 0;
+// 月間サマリーグラフを下揃えにする
+div.outer {  
+    display: table;  
+    height: 100px;  
+    width: 100%;  
+}  
+    * html div.outer {  
+        position: relative;  
+    }  
+    *+html div.outer {  
+        position: relative;  
+    }  
+div.vertical_bottom {  
+    display: table-cell;  
+    vertical-align: bottom;  
+}  
+    * html div.vertical_bottom {  
+        position: absolute;  
+        top: 100%;  
+    }  
+    *+html div.vertical_bottom {  
+        position: absolute;  
+        top: 100%;  
+    }  
+div.vertical_bottom p.inner {  
     margin: 0;
-    }
 }
+    * html div.vertical_bottom p.inner {  
+        position: relative;  
+        top: -100%;  
+    }  
+    *+html div.vertical_bottom p.inner {  
+        position: relative;  
+        top: -100%;  
+    }  
 
 
 // 消化有休リスト
