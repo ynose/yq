@@ -25,6 +25,7 @@
           <div class="progress">
             <%# 分子 %>
             <% carryover_hours = @paid_vacation.carryover_hours < @vacation_total_hours ? @paid_vacation.carryover_hours : @vacation_total_hours %>
+            <% carryover_hours_remain = @vacation_total_hours < @paid_vacation.carryover_hours ? @paid_vacation.carryover_hours - @vacation_total_hours : 0 %>
             <% over_hours = @paid_vacation.carryover_hours + @paid_vacation.hours < @vacation_total_hours ? @vacation_total_hours - (@paid_vacation.carryover_hours + @paid_vacation.hours) : 0 %>
             <% hours = @vacation_total_hours - (carryover_hours + over_hours) %>
             
@@ -33,12 +34,16 @@
             
             <%# 消化率 %>
             <% carryover_percent = (carryover_hours / total_hours) * 100 %>
-            <% percent = (hours / total_hours) * 100 %>
+            <% carryover_remain_percent = (carryover_hours_remain / total_hours) * 100 %>
+            <% percent = ((hours - carryover_hours_remain) / total_hours) * 100 %>
             <% over_percent = (over_hours / total_hours) * 100 %>
             
             <!-- 繰り越し消化日数 -->
             <div class="progress-bar progress-bar-success" style="width: <%= carryover_percent %>%;">
               <%= (carryover_hours / 8).ceil %><small>日</small>
+            </div>
+            <!-- 繰り越し残り日数 -->
+            <div class="progress-bar" style="background-color: #ded; width: <%= carryover_remain_percent %>%;">
             </div>
            <!-- 支給消化日数 -->
             <% if 0 < hours then %>
