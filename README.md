@@ -1,4 +1,6 @@
-== README
+yuq
+
+[![Build Status](https://secure.travis-ci.org/ynose/yq.png)](http://travis-ci.org/ynose/yq)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
