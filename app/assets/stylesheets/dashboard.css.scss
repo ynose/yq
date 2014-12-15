@@ -31,6 +31,17 @@ $pages:2;
     }
 }
 
+// プログレスバー
+.progress-caption {
+  font:{
+    size: large;
+  }
+}
+.progress-caption.inner {
+    position: relative;
+    top: 15%;    
+}
+
 // ページインジケータ
 #indicator {
   position: relative;
