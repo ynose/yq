@@ -9,14 +9,14 @@
     <h1 class="text-center">
       &nbsp;&nbsp;<strong><%= ((paid_vacation_total_hours - @vacation_total_hours) / 8).to_i %></strong><small>日</small>
     </h1>
-    
+
     <!-- のこり時間 -->
     <h5 class="text-center">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= paid_vacation_total_hours - @vacation_total_hours %><small>時間</small>
     </h5>
     <br/>
     <br/>
-    
+
   </div>
 </div>
 
@@ -27,46 +27,48 @@
     </div>
 
     <div class="col-xs-8 nopadding">
-      
+
       <div class="progress" style="height: 2em;">
         <%# 分子 %>
         <% carryover_hours = @paid_vacation.carryover_hours < @vacation_total_hours ? @paid_vacation.carryover_hours : @vacation_total_hours %>
         <% carryover_hours_remain = @vacation_total_hours < @paid_vacation.carryover_hours ? @paid_vacation.carryover_hours - @vacation_total_hours : 0 %>
         <% over_hours = @paid_vacation.carryover_hours + @paid_vacation.hours < @vacation_total_hours ? @vacation_total_hours - (@paid_vacation.carryover_hours + @paid_vacation.hours) : 0 %>
         <% hours = @vacation_total_hours - (carryover_hours + over_hours) %>
-        
+
         <%# 分母 %>
         <% total_hours = (paid_vacation_total_hours + over_hours) %>
-        
+
         <%# 消化率 %>
         <% carryover_percent = (carryover_hours / total_hours) * 100 %>
         <% carryover_remain_percent = (carryover_hours_remain / total_hours) * 100 %>
         <% percent = ((hours - carryover_hours_remain) / total_hours) * 100 %>
         <% over_percent = (over_hours / total_hours) * 100 %>
-        
+
         <!-- 繰り越し消化日数 -->
+        <% if 0 < carryover_hours %>
         <div class="progress-bar progress-bar-success" style="width: <%= carryover_percent %>%;">
           <span class="progress-caption inner"><%= (carryover_hours / 8).ceil %><small>日</small></span>
         </div>
+        <% end %>
         <!-- 繰り越し残り日数 -->
         <div class="progress-bar" style="background-color: #ded; width: <%= carryover_remain_percent %>%;">
         </div>
        <!-- 支給消化日数 -->
-        <% if 0 < hours then %>
+        <% if 0 < hours %>
         <div class="progress-bar progress-bar-warning" style="width: <%= percent %>%;">
           <span class="progress-caption inner"><%= (hours / 8).ceil %><small>日</small></span>
         </div>
         <% end %>
         <!-- 超過日数 -->
-        <% if 0 < hours then %>
+        <% if 0 < hours %>
         <div class="progress-bar progress-bar-danger" style="width: <%= over_percent %>%;">
-          <%= (over_hours / 8).ceil %><small>日</small>
+          <span class="progress-caption inner"><%= (over_hours / 8).ceil %><small>日</small></span>
         </div>
         <% end %>
       </div>
-      
+
     </div>
-    <div class="col-xs-2">
+    <div class="col-xs-2" style="padding: 1px 0 0 6px; ">
       <!-- 全休暇日数 -->
       <nobr><span class="progress-caption"><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></span></nobr>
     </div>
