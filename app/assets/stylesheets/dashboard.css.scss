@@ -5,7 +5,7 @@
 #dashboard {
   padding: 15px 0 15px 0;
   margin: 0;
-  height: 320px; // ページ部分の高さを変える場合はここで指定する
+  height: 300px; // ページ部分の高さを変える場合はここで指定する
   background-color: #f0f0f0;
 }
 
@@ -49,7 +49,7 @@ $pages:2;
   width: 13px;
   height: 5px;
   background: image-url("indicator_bg.png") repeat-x left top;
-  margin: 20px auto 0 auto;
+  margin: 0 auto 0 auto;
   img {
     position: absolute;
     left: 0;
@@ -156,3 +156,7 @@ div.vertical_bottom p.inner {
   max-width: 150px;
 }
 
+// 過去日付の文字
+.past {
+  color: grey;
+}
