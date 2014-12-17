@@ -59,8 +59,10 @@
             <%= vacation.fixed %>
           </div>    
         </td>
-        <!-- 編集画面リンク -->
-        <td class="text-right"><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <!-- 編集ボタン -->
+        <td class="text-right">
+          <a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+        </td>
       </tr>
       <% end %>
     </table>
