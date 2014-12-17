@@ -3,16 +3,21 @@
   <div class="col-xs-12">
 
     <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
+    <% remain_days = ((paid_vacation_total_hours - @vacation_total_hours) / 8).to_i  %>
+    <% remain_hours = ((paid_vacation_total_hours - @vacation_total_hours) - (remain_days * 8)).to_i  %>
 
     <!-- のこり日数(時間を日数に換算) -->
     <h4 class="text-center">のこり</h4>
     <h1 class="text-center">
-      &nbsp;&nbsp;<strong><%= ((paid_vacation_total_hours - @vacation_total_hours) / 8).to_i %></strong><small>日</small>
+      &nbsp;&nbsp;<strong><%= remain_days %></strong><small>日</small>
     </h1>
 
-    <!-- のこり時間 -->
+    <!-- のこり端数時間 -->
     <h5 class="text-center">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= paid_vacation_total_hours - @vacation_total_hours %><small>時間</small>
+      <% if remain_hours > 0 %>
+        &nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;<%= remain_hours %><small>&nbsp;時間</small>
+      <% end %>
+      <br />
     </h5>
     <br/>
     <br/>
