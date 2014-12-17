@@ -2,6 +2,8 @@ yuq
 
 [![Build Status](https://secure.travis-ci.org/ynose/yq.png)](http://travis-ci.org/ynose/yq)
 
+[Sample Page](http://yuq.herokuapp.com/dashboard/999/2014)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
