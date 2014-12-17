@@ -36,7 +36,7 @@
           </div>
         </td>
         <!-- 時刻 -->
-        <td>
+        <td style="vertical-align: middle;">
           <div class="hidden-xs" style="white-space: nowrap;">
             <div class="vacation hour">
               <%= vacation.start_datetime.strftime("%H").to_i %>
@@ -48,15 +48,17 @@
           </div>
         </td>
         <!-- メモ -->
-        <td>
+        <td style="vertical-align: middle;">
           <div class="vacation memo">
             <%= vacation.memo %>
           </div>
         </td>
         <!-- 確定 -->
-        <td>
+        <td style="vertical-align: middle;">
           <div class="hidden-xs">
-            <%= vacation.fixed %>
+            <% if vacation.fixed %>
+              <span class="glyphicon glyphicon-pushpin"></span>
+            <% end %>
           </div>    
         </td>
         <!-- 編集ボタン -->
