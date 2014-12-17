@@ -81,69 +81,7 @@
     </div>
     
     <!-- 消化有休リスト -->
-    <div class="row">
-      <div class="col-xs-12">
-        <table class="table table-striped table-hover">
-          <% youbi = %w[日 月 火 水 木 金 土] %>
-          <% month = 0 %>
-          <% @vacations.each do |vacation| %>
-          <tr>
-            <!-- 月/日 曜日 -->
-            <td>
-              <div style="white-space: nowrap;">
-                <div class="vacation month">
-                  <% if month != vacation.start_datetime.strftime("%m").to_i %>
-                    <% month = vacation.start_datetime.strftime("%m").to_i %>
-                    <%= month %> /
-                  <% else %>
-                     
-                  <% end %>
-                </div>
-                <div class="vacation date">
-                  <strong><%= vacation.start_datetime.strftime("%d").to_i %></strong>
-                </div>
-                <div class="vacation weekday">
-                  <%= youbi[vacation.start_datetime.wday] + "" %>
-                </div>
-              </div>
-            </td>
-            <!-- 消化時間 -->
-            <td>
-              <div>
-                <%= vacation.hours %>
-              </div>
-            </td>
-            <!-- 時刻 -->
-            <td>
-              <div class="hidden-xs" style="white-space: nowrap;">
-                <div class="vacation hour">
-                  <%= vacation.start_datetime.strftime("%H").to_i %>
-                </div><%= vacation.start_datetime.strftime(":%M") %>
-                  -
-                <div class="vacation hour">
-                  <%= vacation.end_datetime.strftime("%H").to_i %>
-                </div><%= vacation.end_datetime.strftime(":%M") %>
-              </div>
-            </td>
-            <!-- メモ -->
-            <td>
-              <div class="vacation memo">
-                <%= vacation.memo %>
-              </div>
-            </td>
-            <!-- 確定 -->
-            <td>
-              <div class="hidden-xs">
-                <%= vacation.fixed %>
-              </div>    
-            </td>
-            <!-- 編集画面リンク -->
-            <td class="text-right"><a href="<%= edit_vacation_path(vacation.id.to_s) + "?callback_url=" + request.original_url%>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></a></td>
-          </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
+    <%= render 'list' %>
 
   </div>
 </div>
