@@ -3,6 +3,7 @@ class VacationsController < ApplicationController
   def new
     @vacation = Vacation.new
     @vacation.user_id = params[:user_id]
+    @user = User.find(@vacation.user_id)
 
     # 初期値は今日9:00-18:00
     @vacation.start_datetime = datetime_parse("#{Date.today.to_s} 9:00")
@@ -27,6 +28,7 @@ class VacationsController < ApplicationController
 
   def edit
   	@vacation = Vacation.find(params[:id])
+    @user = User.find(@vacation.user_id)
   end
 
   def update

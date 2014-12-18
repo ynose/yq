@@ -26,10 +26,11 @@ ja:
         user_id: "ユーザー"
         start_datetime: "日付"
         memo: "メモ"
+        fixed: "確定"
       
-  destory: "削除"
+  destroy: "削除"
   back: "戻る"
   submit: "登録"
 
-  destory_confirm: "削除しますか?"
+  destroy_confirm: "削除しますか?"
   
