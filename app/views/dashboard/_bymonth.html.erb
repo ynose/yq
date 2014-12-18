@@ -1,32 +1,40 @@
 <%# 月間サマリーグラフ %>
-<div id="bymonth" class="row">
-  <div class="col-xs-12">
+<div id="bymonth">
 
-    <div class="row">
-      <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
-      <div class="col-xs-1 nopadding">
-        <div class="outer">
-          <div class="vertical_bottom">
-            <span class="hour"><%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %></span>
-            <p class"inner" style="background: linear-gradient(#77f, #88f); margin: 0 auto 0 auto; width: 80%; height: <%= @vacationHourOfMonth[m] %>px;"></p>
-          </div>
+  <div class="row">
+    <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
+    <div class="col-xs-1 nopadding">
+      <div class="outer">
+        <div class="vertical_bottom">
+          <span class="hour"><%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %></span>
+          <p class="inner" style="background: linear-gradient(#77f, #88f); margin: 0 auto 0 auto; width: 80%;" data-hour="<%= @vacationHourOfMonth[m] %>"></p>
         </div>
       </div>
-      <% end %>
     </div>
-
-    <div class="row">
-      <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
-      <% targetmonth = Date::new(@paid_vacation.year + (4 <= m ? 0 : 1), m , 1) %>
-      <% thismonth = Date::new(Date.today.year, Date.today.month, 1) %>
-      <div class="col-xs-1 nopadding <%= "past" if targetmonth < thismonth %>"><%= m %></div>
-      <% end %>
-    </div>
-
+    <% end %>
   </div>
+
+  <div class="row">
+    <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %> 
+    <% targetmonth = Date::new(@paid_vacation.year + (4 <= m ? 0 : 1), m , 1) %>
+    <% thismonth = Date::new(Date.today.year, Date.today.month, 1) %>
+    <div class="col-xs-1 nopadding <%= "past" if targetmonth < thismonth %>"><%= m %></div>
+    <% end %>
+  </div>
+
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
+    var hourMax = <%= @vacationHourOfMonth.max %>;
+    
+    // グラフを４月から順にアニメーション表示する
+    $('#bymonth .inner').each(function(i) {
+      var hour = $(this).data('hour');
+      $(this).delay(120 * i).animate ({
+        height: (((hour / hourMax) * 40)) + "px"
+      }, 1000, "easeInOutBack")
+    });
+    
     // クリックしたらグラフの上に消化時間を表示する
     $('#bymonth').click(function() {
       $('.vertical_bottom span').fadeToggle(300);
