@@ -36,10 +36,9 @@
           m++;
           $(this).delay(120 * m).animate ({
             height: (((hour / hourMax) * 40)) + "px"
-          }, 1000, "easeInOutBack",
-          function() {
-            $('span.hour').fadeIn(300);
-          });
+          }, 1000, "easeInOutBack");
+          // 数値はグラフよりも少し遅れて表示させる
+          $(this).prev('.hour').delay((120 * m) + 700).fadeIn(300);
         }
       });
     };
