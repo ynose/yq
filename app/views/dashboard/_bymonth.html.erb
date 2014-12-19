@@ -38,7 +38,7 @@
             height: (((hour / hourMax) * 40)) + "px"
           }, 1000, "easeInOutBack");
           // 数値はグラフよりも少し遅れて表示させる
-          $(this).prev('.hour').delay((120 * m) + 700).fadeIn(300);
+          $(this).prev('.hour').delay((120 * m) + 700).fadeIn(350);
         }
       });
     };
@@ -53,11 +53,14 @@
       $('#bymonth .inner').each(function(i) {
         $(this).animate ({
           height: "0px"
-        }, "normal", "easeInOutBack");
+        }, 1000, "easeInOutBack");
       });
 
-      // グラフ表示を実行する
-      monthAnimate();
+      // グラフが隠れるのを待ってからグラフを再表示する
+      var deray = setInterval(function() {
+          monthAnimate();
+          clearInterval(deray);
+        }, 1000);
     });
 
     // ロード時にグラフ表示を実行する
