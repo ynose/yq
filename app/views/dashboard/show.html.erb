@@ -101,6 +101,13 @@
         $('#remain-bar').css("opacity", 1 - (scrollTop / 50)).offset( {top: remainbarOffset} );
 
         $('#indicator').css("opacity", 1 - (scrollTop / 20)).offset( {top: indicatorOffset} ) ;
+      } else {
+        $('#dashboard').height(300 - 30 - 90);
+
+        $('#remain-bar').css("opacity", 1 - (90 / 50)).offset( {top: remainbarOffset} );
+
+        $('#indicator').css("opacity", 1 - (90 / 20)).offset( {top: indicatorOffset} ) ;
+        
       }
     });
     

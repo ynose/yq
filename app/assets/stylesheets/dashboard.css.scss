@@ -117,6 +117,17 @@ div.vertical_bottom p.inner {
     }  
 
 
+// 詳細
+.detail-caption {
+  text-align: right !important;
+  width: 6em !important;
+}
+.detail-value {
+  text-align: right !important;
+  width: 8em !important;
+}
+
+
 // 消化有休リスト
 .vacation {
   display: inline-block; 
