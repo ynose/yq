@@ -87,3 +87,22 @@
 </div>
 
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var remainbarOffset = $('#remain-bar').offset().top;
+    var indicatorOffset = $('#indicator').offset().top;
+
+    $(window).scroll(function() {
+      var scrollTop = $(this).scrollTop();
+      
+      if (scrollTop < 90) {
+        $('#dashboard').height(300 - 30 - scrollTop);
+
+        $('#remain-bar').css("opacity", 1 - (scrollTop / 50)).offset( {top: remainbarOffset} );
+
+        $('#indicator').css("opacity", 1 - (scrollTop / 20)).offset( {top: indicatorOffset} ) ;
+      }
+    });
+    
+  });
+</script>
