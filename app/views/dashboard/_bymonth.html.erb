@@ -43,31 +43,37 @@
       });
     };
 
-    // クリックしたらグラフ再表示を実行する
-    $('#bymonth').click(function() {
-      // アニメーション中は無視する
-      if ($('#bymonth .inner').is(':animated')) { return }
-
-      // 表示されているグラフを隠す
-      $('.vertical_bottom span').delay(900).fadeOut(300);
-      $('#bymonth .inner').each(function(i) {
-        $(this).animate ({
-          height: "+=10px"
-        }, 400, "easeInOutQuad", function() {
-          $(this).animate ({
-            height: "0px"
-          }, 1000, "easeInOutCirc");
-        });
-      });
-
-      // グラフが隠れるのを待ってからグラフを再表示する
-      var deray = setInterval(function() {
-          monthAnimate();
-          clearInterval(deray);
-        }, 1000);
-    });
-
     // ロード時にグラフ表示を実行する
     monthAnimate();
+
+    // 一定周期でグラフ表示のアニメーションを繰り返す
+    var repeatMonthAnimate = setInterval(function() {
+      $('#bymonth .inner').each(function(i) {
+        if ($(this).data('hour') > 0) {
+          $(this).delay(120 * i).animate ({
+            height: "+=10px"
+          }, 400, "easeInOutQuad", function() {
+
+            $(this).prev('.hour').animate ({
+              height: "+=1px"
+            }, 400, "easeInOutQuad", function() {
+              $(this).animate ({
+                height: "-=4px"
+              }, 300, "easeInOutQuad", function() {
+                $(this).css ({
+                  height: "+=3px"
+                });
+              });
+            });
+
+            $(this).animate ({
+              height: "-=10px"
+            }, 1000, "easeInOutCirc");
+          });
+
+        }
+      });
+    }, 8000); // 繰り返し秒数
+
   });
 </script>
