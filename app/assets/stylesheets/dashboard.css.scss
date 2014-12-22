@@ -7,6 +7,7 @@
   margin: 0;
   height: 300px; // ページ部分の高さを変える場合はここで指定する
   background-color: #f0f0f0;
+  background: linear-gradient(rgba(235,235,235,0.95) 100%, rgba(235,235,235,0.95) 100%);
   overflow: hidden;
 }
 
@@ -170,5 +171,5 @@ div.vertical_bottom p.inner {
 
 // 過去日付の文字
 .past {
-  color: #c8c8c8;
+  color: #9b9b9b;
 }

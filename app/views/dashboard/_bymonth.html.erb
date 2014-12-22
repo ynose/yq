@@ -7,7 +7,7 @@
       <div class="outer">
         <div class="vertical_bottom">
           <span class="hour"><%= sprintf("%g", @vacationHourOfMonth[m]) if @vacationHourOfMonth[m] > 0 %></span>
-          <p class="inner" style="background: linear-gradient(#77f, #88f); margin: 0 auto 0 auto; width: 80%;" data-hour="<%= @vacationHourOfMonth[m] %>"></p>
+          <p class="inner" style="background: linear-gradient(#79bfff 0%, #87bdff 100%); margin: 0 auto 0 auto; width: 80%;" data-hour="<%= @vacationHourOfMonth[m] %>"></p>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
 
         }
       });
-    }, 8000); // 繰り返し秒数
+    }, 10000); // 繰り返し秒数
 
   });
 </script>
