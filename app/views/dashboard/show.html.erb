@@ -90,18 +90,20 @@
 <script type="text/javascript">
   $(document).ready(function(){
     var scrolled = false;
+    var remainHeight = 300;
+    var byMonthHeight = 90;
     $(window).scroll(function() {
       var scrollTop = $(this).scrollTop();
 
-      if (scrollTop > 90 && scrolled == false) {
+      if (scrollTop > byMonthHeight && scrolled == false) {
         scrolled = true;
         $('#dashboard').animate ({
-          height: 300 - 90 + "px"
+          height: remainHeight - byMonthHeight + "px"
         }, "normal", "swing");
-      } else if (scrollTop <= 90 && scrolled == true) {
+      } else if (scrollTop <= 0 && scrolled == true) {
         scrolled = false;
         $('#dashboard').animate ({
-          height: 300 + "px"
+          height: remainHeight + "px"
         }, "normal", "swing");
       }
     });

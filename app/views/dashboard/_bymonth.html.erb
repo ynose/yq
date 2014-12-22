@@ -43,17 +43,21 @@
       });
     };
 
-    // クリックしたらグラフ表示を実行する
+    // クリックしたらグラフ再表示を実行する
     $('#bymonth').click(function() {
       // アニメーション中は無視する
       if ($('#bymonth .inner').is(':animated')) { return }
 
       // 表示されているグラフを隠す
-      $('.vertical_bottom span').fadeOut(300);
+      $('.vertical_bottom span').delay(900).fadeOut(300);
       $('#bymonth .inner').each(function(i) {
         $(this).animate ({
-          height: "0px"
-        }, 1000, "easeInOutBack");
+          height: "+=10px"
+        }, 400, "easeInOutQuad", function() {
+          $(this).animate ({
+            height: "0px"
+          }, 1000, "easeInOutCirc");
+        });
       });
 
       // グラフが隠れるのを待ってからグラフを再表示する
