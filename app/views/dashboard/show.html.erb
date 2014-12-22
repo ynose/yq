@@ -1,25 +1,25 @@
 <div class="row" style="position: fixed; width: 100%; z-index: 99">
   <div id="dashboard" class="col-xs-12">
-    
+
     <% if @paid_vacation != nil then %>
     <h4>&nbsp;&nbsp;<%= @paid_vacation.year %><small>年度</small></h4><br/>
 
     <div id="flick">
       <ul>
-      
+
       <!-- ページ数はdashboard.css.scssの$pagesで指定
         ページ数は偶数にすること。奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない -->
-      
+
       <!-- 1ページ -->
       <li>
         <%= render 'remain' %>
       </li>
-    
+
       <!-- 2ページ -->
       <li>
         <%= render 'detail' %>
       </li>
-    
+
       </ul>
 
     </div><!-- flick -->
@@ -79,7 +79,7 @@
         <br />
       </div>
     </div>
-    
+
     <!-- 消化有休リスト -->
     <%= render 'list' %>
 
@@ -89,27 +89,22 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
-    var remainbarOffset = $('#remain-bar').offset().top;
-    var indicatorOffset = $('#indicator').offset().top;
-
+    var scrolled = false;
     $(window).scroll(function() {
       var scrollTop = $(this).scrollTop();
-      
-      if (scrollTop < 90) {
-        $('#dashboard').height(300 - 30 - scrollTop);
 
-        $('#remain-bar').css("opacity", 1 - (scrollTop / 50)).offset( {top: remainbarOffset} );
-
-        $('#indicator').css("opacity", 1 - (scrollTop / 20)).offset( {top: indicatorOffset} ) ;
-      } else {
-        $('#dashboard').height(300 - 30 - 90);
-
-        $('#remain-bar').css("opacity", 1 - (90 / 50)).offset( {top: remainbarOffset} );
-
-        $('#indicator').css("opacity", 1 - (90 / 20)).offset( {top: indicatorOffset} ) ;
-        
+      if (scrollTop > 90 && scrolled == false) {
+        scrolled = true;
+        $('#dashboard').animate ({
+          height: 300 - 30 - 90 + "px"
+        }, "normal", "swing");
+      } else if (scrollTop <= 90 && scrolled == true) {
+        scrolled = false;
+        $('#dashboard').animate ({
+          height: 300 + "px"
+        }, "normal", "swing");
       }
     });
-    
+
   });
 </script>
