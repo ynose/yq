@@ -36,9 +36,17 @@
   </div>
 
   <!-- メモ -->
-  <div class="form-group">
-    <%= f.label :memo %>
-    <%= f.text_field :memo, :class => "form-control" %>
+  <%= f.label :memo %>
+  <div class="input-group">
+    <%= f.text_field :memo, :id => "memo", :class => "form-control" %>
+    <div class="input-group-btn">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+      <ul id="memo-list" class="dropdown-menu dropdown-menu-right" role="menu">
+        <% @memos.each do |memo| %>
+        <li><a href="#"><%= memo.memo %></a></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 
   <!-- 確定 -->
@@ -57,3 +65,14 @@
 
 <br>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // メモのドロップダウンリストイベント
+    $("#memo-list > li > a").on("click", function(e) {
+      $("#memo").val($(this).text());
+      e.preventDefault();
+    });
+  });
+</script>
+

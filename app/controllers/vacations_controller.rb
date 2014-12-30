@@ -8,6 +8,9 @@ class VacationsController < ApplicationController
     # 初期値は今日9:00-18:00
     @vacation.start_datetime = datetime_parse("#{Date.today.to_s} 9:00")
     @vacation.end_datetime = datetime_parse("#{Date.today.to_s} 18:00")
+    
+    # 過去のメモをリストから選択可能にする
+    @memos = Vacation.where(user_id: @vacation.user_id).order(:memo).select(:memo).distinct
   end
 
   def create
@@ -29,6 +32,9 @@ class VacationsController < ApplicationController
   def edit
   	@vacation = Vacation.find(params[:id])
     @user = User.find(@vacation.user_id)
+
+    # 過去のメモをリストから選択可能にする
+    @memos = Vacation.where(user_id: @vacation.user_id).order(:memo).select(:memo).distinct
   end
 
   def update
