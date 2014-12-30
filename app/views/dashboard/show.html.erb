@@ -89,22 +89,16 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
-    var scrolled = false;
     var remainHeight = 300;
-    var byMonthHeight = 90;
+    // 上にスクロールしたらダッシュボードを縮小する
     $(window).scroll(function() {
       var scrollTop = $(this).scrollTop();
 
-      if (scrollTop > byMonthHeight && scrolled == false) {
-        scrolled = true;
-        $('#dashboard').animate ({
-          height: remainHeight - byMonthHeight + "px"
-        }, "normal", "swing");
-      } else if (scrollTop <= 0 && scrolled == true) {
-        scrolled = false;
-        $('#dashboard').animate ({
-          height: remainHeight + "px"
-        }, "normal", "swing");
+      if (scrollTop < remainHeight && scrollTop > 0) {
+        $('#dashboard').height((remainHeight - 27) - scrollTop);
+        if ($('#dashboard').height() <= 30) {
+          $('#dashboard').height(30);
+        }
       }
     });
 
