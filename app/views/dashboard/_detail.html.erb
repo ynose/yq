@@ -1,12 +1,11 @@
 <%# 詳細表示 %>
 <div class="row text-center">
   <div class="col-xs-10 col-xs-offset-1">
-    <%= @user.id %>
-    <%= @user.name %>
-    <%= @user.email %>
+    <%= @user.id %>: <%= @user.name %>
+    <br />
+    <a href="mailto:#" class="small"><%= @user.email %></a>
   </div>
 </div>
-<br />
 <% if @paid_vacation != nil then %>
 <div class="row text-center">
   <div class="col-xs-9 col-xs-offset-3">

@@ -2,13 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#year {
+  position: fixed;
+  background-color: #f0f0f0;
+  background: rgba(235,235,235,0.95);
+  height: 40px;
+}
+
 #dashboard {
   padding: 15px 0 15px 0;
-  margin: 0;
-  height: 300px; // ページ部分の高さを変える場合はここで指定する
+  margin: 0px;
+  height: 280px; // ページ部分の高さを変える場合はここで指定する
   background-color: #f0f0f0;
-  background: linear-gradient(rgba(235,235,235,0.95) 100%, rgba(235,235,235,0.95) 100%);
+  background: linear-gradient(rgba(235,235,235,0.95) 40px, rgba(240,240,240,0.95) 100%);
   overflow: hidden;
+}
+
+#flick {
+  margin-top: 40px;
 }
 
 // flicksimple.js用ページ設定
@@ -16,7 +27,7 @@
    奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない */
 $pages:2; 
 
-#flick {
+#flick-body {
 	width: 100%;
 	position: relative; /* IE6・7の overflowバグ回避 */
 	overflow: auto;     /* JavaScript無効時にスクロール表示させたいから */

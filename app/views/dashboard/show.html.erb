@@ -1,33 +1,36 @@
-<div class="row" style="position: fixed; width: 100%; z-index: 99">
+    
+<div class="row">
+  <div id="year" style="position: fixed; width: 100%; z-index: 99">
+    <h4>&nbsp;&nbsp;<%= @paid_vacation.year %><small>年度</small></h4><br/>
+  </div>
   <div id="dashboard" class="col-xs-12">
 
     <% if @paid_vacation != nil then %>
-    <h4>&nbsp;&nbsp;<%= @paid_vacation.year %><small>年度</small></h4><br/>
-
     <div id="flick">
-      <ul>
-
-      <!-- ページ数はdashboard.css.scssの$pagesで指定
-        ページ数は偶数にすること。奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない -->
-
-      <!-- 1ページ -->
-      <li>
-        <%= render 'remain' %>
-      </li>
-
-      <!-- 2ページ -->
-      <li>
-        <%= render 'detail' %>
-      </li>
-
-      </ul>
-
-    </div><!-- flick -->
-   <% end %>
-
-    <!-- ページインジケーター -->
-    <div id="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
-
+      <div id="flick-body">
+        <ul>
+  
+        <!-- ページ数はdashboard.css.scssの$pagesで指定
+          ページ数は偶数にすること。奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない -->
+  
+        <!-- 1ページ -->
+        <li>
+          <%= render 'remain' %>
+        </li>
+  
+        <!-- 2ページ -->
+        <li>
+          <%= render 'detail' %>
+        </li>
+  
+        </ul>
+  
+      </div><!-- flick -->
+     <% end %>
+  
+      <!-- ページインジケーター -->
+      <div id="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
+    </div>
   </div>
 </div>
 
@@ -35,7 +38,7 @@
 <!-- フリック動作用JavaScript -->
 <script type="text/javascript">
 (function(){
-	var fl = $('#flick');
+	var fl = $('#flick-body');
 	var indelm = $('#indicator');
 	var indimg = indelm.find('img');
 
@@ -62,7 +65,7 @@
 })();
 </script>
 
-<div style="position: relative; top: 300px;">
+<div>
 
 <!-- 月間サマリーグラフ -->
 <%= render 'bymonth' %>
@@ -89,18 +92,17 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
-    var remainHeight = 300;
-    // 上にスクロールしたらダッシュボードを縮小する
+    var remainHeight = 280;
+    var scrollOut = 100;
+    var fadeOut = 0.5;
+    // 上にスクロールしながらダッシュボードをフェードアウトする
     $(window).scroll(function() {
       var scrollTop = $(this).scrollTop();
-
-      if (scrollTop < remainHeight && scrollTop > 0) {
-        $('#dashboard').height((remainHeight - 27) - scrollTop);
-        if ($('#dashboard').height() <= 30) {
-          $('#dashboard').height(30);
-        }
+      if (scrollOut < scrollTop) {
+        $("#flick").css("opacity", 1 - ((scrollTop - scrollOut) / (remainHeight * fadeOut)));
+      } else {
+        $("#flick").css("opacity", 1.0);
       }
     });
-
   });
 </script>
