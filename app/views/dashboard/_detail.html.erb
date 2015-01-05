@@ -31,16 +31,16 @@
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">消化</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @vacation_total_hours %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static"><%= @vacation_hours_total %>&nbsp;<small>時間</small></p>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">残り</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_total_hours %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static"><%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_hours_total %>&nbsp;<small>時間</small></p>
         </div>
       </div>
     </div>
-  </div>    
+  </div>
 </div>
 <% end %>

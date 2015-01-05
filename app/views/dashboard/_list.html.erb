@@ -4,6 +4,7 @@
     <table class="table table-striped table-hover">
       <% youbi = %w[日 月 火 水 木 金 土] %>
       <% month = 0 %>
+      <% vacation_hours_sum = 0 %>
       <% @vacations.each do |vacation| %>
       <tr>
         <!-- 月/日 曜日 -->
@@ -11,14 +12,14 @@
         <% m = vacation.start_datetime.strftime("%m").to_i %>
         <% startdate = Date::new(vacation.start_datetime.year, vacation.start_datetime.month, vacation.start_datetime.day) %>
         <% today = Date.today %>
-          
+
           <div class="<%= "past" if startdate < today %>" style="white-space: nowrap;">
             <div class="vacation month">
               <% if month != vacation.start_datetime.strftime("%m").to_i %>
                 <% month = vacation.start_datetime.strftime("%m").to_i %>
                 <%= month %> /
               <% else %>
-                 
+
               <% end %>
             </div>
             <div class="vacation date">
@@ -30,10 +31,11 @@
           </div>
         </td>
         <!-- 消化時間 -->
-        <td style="vertical-align: middle;">
-          <div>
-            <%= vacation.hours %>
-          </div>
+        <td style="vertical-align: middle; white-space: nowrap;">
+          <%= vacation.hours %>&nbsp;&nbsp;
+          <!--　消化時間累計 -->
+          <% vacation_hours_sum += vacation.hours %>
+          <div class="vacation hours_sum"><%= @vacation_hours_total - vacation_hours_sum + vacation.hours %></div>
         </td>
         <!-- 時刻 -->
         <td style="vertical-align: middle;">
@@ -59,7 +61,7 @@
             <% if vacation.fixed %>
               <span class="glyphicon glyphicon-pushpin"></span>
             <% end %>
-          </div>    
+          </div>
         </td>
         <!-- 編集ボタン -->
         <td class="text-right">

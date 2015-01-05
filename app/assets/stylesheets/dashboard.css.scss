@@ -25,7 +25,7 @@
 // flicksimple.js用ページ設定
 /* ページ数は偶数にすること。
    奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない */
-$pages:2; 
+$pages:2;
 
 #flick-body {
 	width: 100%;
@@ -52,7 +52,7 @@ $pages:2;
 }
 .progress-caption.inner {
     position: relative;
-    top: 15%;    
+    top: 15%;
 }
 
 // ページインジケータ
@@ -77,7 +77,7 @@ $pages:2;
   text-align: center;
   font:{
     size: smaller;
-  }  
+  }
 }
 #bymonth .hour {
   font:{
@@ -93,40 +93,40 @@ $pages:2;
 }
 
 // 月間サマリーグラフを下揃えにする
-div.outer {  
-    display: table;  
+div.outer {
+    display: table;
     height: 70px;
-    width: 100%;  
-}  
-    * html div.outer {  
-        position: relative;  
-    }  
-    *+html div.outer {  
-        position: relative;  
-    }  
-div.vertical_bottom {  
-    display: table-cell;  
-    vertical-align: bottom;  
-}  
-    * html div.vertical_bottom {  
-        position: absolute;  
-        top: 100%;  
-    }  
-    *+html div.vertical_bottom {  
-        position: absolute;  
-        top: 100%;  
-    }  
-div.vertical_bottom p.inner {  
+    width: 100%;
+}
+    * html div.outer {
+        position: relative;
+    }
+    *+html div.outer {
+        position: relative;
+    }
+div.vertical_bottom {
+    display: table-cell;
+    vertical-align: bottom;
+}
+    * html div.vertical_bottom {
+        position: absolute;
+        top: 100%;
+    }
+    *+html div.vertical_bottom {
+        position: absolute;
+        top: 100%;
+    }
+div.vertical_bottom p.inner {
     margin: 0;
 }
-    * html div.vertical_bottom p.inner {  
-        position: relative;  
-        top: -100%;  
-    }  
-    *+html div.vertical_bottom p.inner {  
-        position: relative;  
-        top: -100%;  
-    }  
+    * html div.vertical_bottom p.inner {
+        position: relative;
+        top: -100%;
+    }
+    *+html div.vertical_bottom p.inner {
+        position: relative;
+        top: -100%;
+    }
 
 
 // 詳細
@@ -142,11 +142,11 @@ div.vertical_bottom p.inner {
 
 // 消化有休リスト
 .vacation {
-  display: inline-block; 
+  display: inline-block;
 }
 
 .vacation.month {
-  width:25px; 
+  width:25px;
   text-align: right;
   font:{
     size: smaller;
@@ -164,12 +164,19 @@ div.vertical_bottom p.inner {
 }
 
 .vacation.weekday {
-  width:20px;
+  width:16px;
   font-size: smaller;
 }
 
+.vacation.hours_sum {
+  width:20px;
+  text-align: right;
+  font-size: 8px;
+  color: #9b9b9b;
+}
+
 .vacation.hour {
-  width:16px; 
+  width:16px;
   text-align: right;
 }
 
