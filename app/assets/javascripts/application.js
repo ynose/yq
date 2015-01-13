@@ -18,3 +18,5 @@
 
 // 追加
 //= require jquery.flicksimple
+//= require expGuiCourseLight
+//= require expGuiStation

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/dashboard/:user_id/:year'     => 'dashboard#show'
   get '/vacations/:id/edit/:callback' => 'vacations#edit'
   get '/vacations/new/:user_id'       => 'vacations#new'
+  get '/commute/:user_id/'            => 'commute#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
