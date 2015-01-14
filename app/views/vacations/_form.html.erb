@@ -12,6 +12,9 @@
   <% end %>
 
   <br>
+  <!-- ユーザー -->
+  <%= f.hidden_field :user_id %>
+
   <!-- 日付 -->
   <div class="form-group">
     <%= f.label :start_datetime %>
@@ -51,9 +54,9 @@
   </div>
 
   <input type="hidden" name="callback_url" value="<%= params[:callback_url] %>" />
-  
+
   <br />
-  
+
   <!-- 登録ボタン -->
   <%= f.submit t('submit'), :class => "btn btn-primary btn-block btn-lg"%>
 
@@ -69,4 +72,3 @@
     });
   });
 </script>
-
