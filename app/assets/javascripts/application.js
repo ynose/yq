@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.easing
 //= require turbolinks
-//= require_tree .
+//# require_tree .
 
 // 追加
 //= require jquery.flicksimple
