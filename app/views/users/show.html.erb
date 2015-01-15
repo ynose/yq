@@ -24,41 +24,54 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <strong>From:</strong><span id="stationname_home">ちはら台駅</span><br>
+  <strong>To:</strong><span id="stationname_work">錦糸町駅</span>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
 <br>
 <br>
 
+<!-- Google Map -->
 <div id="map_canvas" style="width:100%; height:300px"></div>
+
 <div>
-  <input id="address" type="textbox">
-  <input type="button" value="Encode" onclick="codeAddress()">
-  <span id="latlng"></span>
+  from:<input id="address_from" type="textbox">
+  <input type="button" value="Encode" onclick="codeAddress()"><br>
+  to:<input id="address_to" type="textbox">
+  <input type="button" value="Route" onclick="calcRoute()">
 </div>
 
+<!-- Google Map API-->
 <script type="text/javascript"
 src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCuaq9l9T171z-hXf7-b83-YwMytMANxrA&sensor=false">
 </script>
 <script type="text/javascript">
   var geocoder;
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
   var map;
   var marker;
   function initialize() {
+    directionsDisplay = new google.maps.DirectionsRenderer();
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(35.696437, 139.81394899999998);
-    document.getElementById("address").value = "錦糸町駅"
+//  var latlng = new google.maps.LatLng(35.696437, 139.81394899999998); // 錦糸町
+
     var mapOptions = {
       zoom: 14,
-      center: latlng,
+//    center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    directionsDisplay.setMap(map);
   }
 
   function codeAddress() {
     // ジオコーディングで住所から緯度経度を取得する
-    var address = document.getElementById("address").value;
+    var address = document.getElementById("address_from").value;
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         // マップの中央を設定
@@ -79,10 +92,28 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCuaq9l9T171z-hXf7-b83-YwMy
       }
     });
   }
-</script>
 
+  function calcRoute(start, end) {
+    var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode.DRIVING  // TRANSITは対応していない
+    };
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+      }
+    });
+  }
+
+//google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
 <script type="text/javascript">
   $(document).ready(function(){
+    // GoogleMapの初期化
     initialize();
+    // 通勤ルート表示
+    calcRoute($("#stationname_home").text(), $("#stationname_work").text());
   });
 </script>
