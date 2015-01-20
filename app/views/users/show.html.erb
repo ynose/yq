@@ -16,7 +16,7 @@
 
 <p>
   <strong>通勤経路:</strong>
-  <span id="stationname_home">ちはら台駅</span>　～ <span id="stationname_work">錦糸町駅</span>
+  <span id="stationname_home">ちはら台</span>　～ <span id="stationname_work">錦糸町</span>
   <button id="ekispert">経路検索</button>
 </p>
 
@@ -43,7 +43,7 @@
     // GoogleMapの初期化
     initializeGoogleMaps();
     // GoogleMap通勤ルート表示
-    showRouteGoogleMaps($("#stationname_home").text(), $("#stationname_work").text());
+    showRouteGoogleMaps($("#stationname_home").text() + "駅", $("#stationname_work").text() + "駅");
 
     // 駅すぱーと経路検索ボタン
     $("#ekispert").on("click", function() {
