@@ -107,15 +107,29 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCuaq9l9T171z-hXf7-b83-YwMy
 
   // 経路表示
   function showRouteGoogleMaps(start, end) {
-    var request = {
-      origin:start,
-      destination:end,
-      travelMode: google.maps.TravelMode.DRIVING  // TRANSITは対応していない
-    };
-    directionsService.route(request, function(response, status) {
-      if (status == google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
+
+    geocoder.geocode({'address': "新浦安駅"}, function(results, status) {
+      // 経由地の緯度経度を取得する
+      var waypoints = null;
+      if (status == google.maps.GeocoderStatus.OK) {
+        waypoints = [{location: results[0].geometry.location}];
       }
+
+      // 経路を表示する
+      var request = {
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.DRIVING,
+        waypoints: waypoints
+      };  // TRANSITは対応していない
+
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+          directionsDisplay.setMap(map);
+        }
+      });
+
     });
   }
 
