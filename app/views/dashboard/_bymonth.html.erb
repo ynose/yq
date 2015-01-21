@@ -24,6 +24,10 @@
 
 </div>
 <script type="text/javascript">
+  // グラフを4月から順にアニメーション表示する
+  bymonth.initHeight(<%= @vacationHourOfMonth.max %>);
+  bymonth.showMonth(<%= @vacationHourOfMonth.max %>);
+
   // $(document).ready(function(){
 
     // // グラフを4月から順にアニメーション表示する

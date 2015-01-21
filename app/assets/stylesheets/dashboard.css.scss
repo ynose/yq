@@ -95,7 +95,7 @@ $pages:2;
 // 月間サマリーグラフを下揃えにする
 div.outer {
     display: table;
-    height: 70px;
+//     height: 100px; // 高さはjavaScriptで計算して設定する
     width: 100%;
 }
     * html div.outer {

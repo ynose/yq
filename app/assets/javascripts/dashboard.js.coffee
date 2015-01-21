@@ -15,26 +15,9 @@ $(document).ready ->
     		$("#flick").css("opacity", 1.0)
     return
 
-  # グラフを4月から順にアニメーション表示する
-  monthAnimate = (hourMax) ->
-  	m = -1
-  	$('#bymonth .inner').each (i) ->
-    	hour = $(this).data('hour')
-    	if hour > 0
-    		m++
-    		$(this).delay(120 * m).animate
-      		height: (((hour / hourMax) * 40)) + "px"
-    		, 1000, "easeInOutBack"
-    		# 数値はグラフよりも少し遅れて表示させる
-    		$(this).prev('.hour').delay((120 * m) + 700).fadeIn(350)
-      return
-    return
-
-		# ロード時にグラフ表示を実行する
-		monthAnimate(48)
-
 
   # 一定周期でグラフ表示のアニメーションを繰り返す
+  clearInterval repeatMonthAnimate
   repeatMonthAnimate = setInterval ->
     $('#bymonth .inner').each (i) ->
     	if $(this).data('hour') > 0
@@ -58,3 +41,28 @@ $(document).ready ->
     return
   	, 10000 # 繰り返し秒数
   	return
+
+###
+  HTMLから呼び出せるようにclassで定義する
+###
+class @ByMonth
+  initHeight: (hourMax) ->
+    $('#bymonth .outer').css height: (hourMax + (8 * 5)) + "px"
+
+  # グラフを4月から順にアニメーション表示する
+  showMonth: (hourMax) ->
+  	m = -1
+  	$('#bymonth .inner').each (i) ->
+    	hour = $(this).data('hour')
+    	if hour > 0
+    		m++
+    		$(this).delay(120 * m).animate
+      		height: (((hour / hourMax) * 40)) + "px"
+    		, 1000, "easeInOutBack"
+    		# 数値はグラフよりも少し遅れて表示させる
+    		$(this).prev('.hour').delay((120 * m) + 700).fadeIn(350)
+      return
+    return
+
+@bymonth = new ByMonth()
+# HTMLからはbymonth.showMonth()のように呼び出す
