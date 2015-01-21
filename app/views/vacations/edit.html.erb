@@ -3,7 +3,7 @@
 <%= render 'form' %>
 
 <%= link_to t('destroy'), vacation_path(:callback_url => params[:callback_url]), 
-                       method: :delete, data: { confirm: t('destroy_confirm') },
+                       method: :delete, data: { confirm: t('destroy_confirm'), no_turbolink: true },
                        :class => "btn btn-danger pull-right" %>
 
-<%= link_to t('back'), params[:callback_url], :class => "btn btn-default" %>
+<%= link_to t('back'), params[:callback_url], :class => "btn btn-default", data: { no_turbolink: true } %>

@@ -1,9 +1,9 @@
 <%# 詳細表示 %>
 <div class="row text-center">
   <div class="col-xs-10 col-xs-offset-1">
-    <%= @user.id %>: <%= @user.name %>
+    <%= @user.id %>: <%= link_to @user.name, @user %>
     <br />
-    <a href="mailto:<%= @user.email %>" class="small"><%= @user.email %></a>
+    <!--<a href="mailto:<%= @user.email %>" class="small"><%= @user.email %></a>-->
   </div>
 </div>
 <% if @paid_vacation != nil then %>
