@@ -67,8 +67,6 @@
 })();
 </script>
 
-<div>
-
 <!-- 月間サマリーグラフ -->
 <%= render 'bymonth' %>
 <br />
@@ -90,21 +88,3 @@
 
   </div>
 </div>
-
-</div>
-<script type="text/javascript">
-  $(document).ready(function(){
-    var remainHeight = 280;
-    var scrollOut = 100;
-    var fadeOut = 0.5;
-    // 上にスクロールしながらダッシュボードをフェードアウトする
-    $(window).scroll(function() {
-      var scrollTop = $(this).scrollTop();
-      if (scrollOut < scrollTop) {
-        $("#flick").css("opacity", 1 - ((scrollTop - scrollOut) / (remainHeight * fadeOut)));
-      } else {
-        $("#flick").css("opacity", 1.0);
-      }
-    });
-  });
-</script>
