@@ -27,10 +27,11 @@ $(document).ready ->
     		, 1000, "easeInOutBack"
     		# 数値はグラフよりも少し遅れて表示させる
     		$(this).prev('.hour').delay((120 * m) + 700).fadeIn(350)
-    	return
+      return
+    return
 
 		# ロード時にグラフ表示を実行する
-		monthAnimate(32)
+		monthAnimate(48)
 
 
   # 一定周期でグラフ表示のアニメーションを繰り返す
@@ -43,19 +44,17 @@ $(document).ready ->
       		$(this).prev('.hour').animate 
       			height: "+=2px"
        		, 400, "easeInOutQuad", ->
-      			$(this).animate 
-        			height: "-=5px"
-      			, 300, "easeInOutQuad", ->
-         			$(this).css 
-        				height: "+=3px"
-         			return
-        		$(this).animate 
-          		height: "-=10px"
-        		, 1000, "easeInOutCirc"
+      		  $(this).animate 
+        	    height: "-=5px"
+            , 300, "easeInOutQuad", ->
+              $(this).css height: "+=3px"
+              return
+            return
+        $(this).animate 
+          height: "-=10px"
+          , 1000, "easeInOutCirc"
         return
-  		return
-  	, 10000
-  return
-  # 繰り返し秒数
-
-return
+      return
+    return
+  	, 10000 # 繰り返し秒数
+  	return
