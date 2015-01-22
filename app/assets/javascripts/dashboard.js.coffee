@@ -46,8 +46,14 @@ $(document).ready ->
   HTMLから呼び出せるようにclassで定義する
 ###
 class @ByMonth
+  graphHeight = 40 # 棒グラフの最大高さ
+
+  # 棒グラフを表示するために必要な高さを設定する
   initHeight: (hourMax) ->
-    $('#bymonth .outer').css height: (hourMax + (8 * 5)) + "px"
+    # 時間数の高さ + アニメーション時の高さ増分(12)) + 棒グラフの最大高さ
+    $('#bymonth .outer').css height: ($('#bymonth .hour').height() + 12 + graphHeight) + "px"
+    # 高さの取得が終わったら非表示にする
+    $('#bymonth .hour').hide()
 
   # グラフを4月から順にアニメーション表示する
   showMonth: (hourMax) ->
@@ -55,12 +61,12 @@ class @ByMonth
   	$('#bymonth .inner').each (i) ->
     	hour = $(this).data('hour')
     	if hour > 0
-    		m++
-    		$(this).delay(120 * m).animate
-      		height: (((hour / hourMax) * 40)) + "px"
+    		m++; delay = 120 * m
+    		$(this).delay(delay).animate
+      		height: (((hour / hourMax) * graphHeight)) + "px"
     		, 1000, "easeInOutBack"
-    		# 数値はグラフよりも少し遅れて表示させる
-    		$(this).prev('.hour').delay((120 * m) + 700).fadeIn(350)
+    		# 数値はグラフよりも少し遅れて(delay + α)表示させる
+    		$(this).prev('.hour').delay(delay + 700).fadeIn(350)
       return
     return
 

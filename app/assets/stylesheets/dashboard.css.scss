@@ -76,14 +76,16 @@ $pages:2;
 #bymonth {
   text-align: center;
   font:{
-    size: smaller;
+    size: 14px;
   }
 }
+// 消化時間数
 #bymonth .hour {
+  display: block;  // JavaScriptで高さを取得する必要があるのでblockにしておく
   font:{
     weight: bold;
   }
-  display: none;  /* デフォルト非表示でクリックすると表示 */
+//  background-color: #fff0f0;  // デバッグ用の背景色
 }
 
 // colのpaddingとmarginを削除する
@@ -95,7 +97,8 @@ $pages:2;
 // 月間サマリーグラフを下揃えにする
 div.outer {
     display: table;
-//     height: 100px; // 高さはjavaScriptで計算して設定する
+//    height: 100px;              // 高さはJavaScriptで計算して設定する
+//    background-color: #e0e0e0;  // デバッグ用の背景色
     width: 100%;
 }
     * html div.outer {
