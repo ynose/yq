@@ -72,3 +72,29 @@ class @ByMonth
 
 @bymonth = new ByMonth()
 # HTMLからはbymonth.showMonth()のように呼び出す
+
+
+class @Flick
+  setting: (fl, indelm, indimg) ->
+    fl.flickSimple(
+    	snap: 'first'
+    	, onResize: ->
+    		# update indicator
+    		indelm.css width: (this.pageLength * 13) + 'px'
+      return
+    	, onChange: ->
+    		# move indicator
+        pos = (this.page - 1) * 13
+      		if this.android or ! this.webkit
+      			indimg.css left: pos + 'px'
+      		else
+            indimg.css webkitTransform: 'translate3d(' + pos + 'px,0,0)'
+        return
+      , onClick: (elm) ->
+        elm.fadeOut('fast').fadeIn('fast').fadeOut('fast').fadeIn('fast')
+        return
+    )
+    return
+
+@flick = new Flick()
+# HTMLからはflick.setting()のように呼び出す

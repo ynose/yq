@@ -39,7 +39,9 @@
 
 <!-- フリック動作用JavaScript -->
 <script type="text/javascript">
-(function(){
+  flick.setting($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
+//(function(){
+/*
 	var fl = $('#flick-body');
 	var indelm = $('#indicator');
 	var indimg = indelm.find('img');
@@ -63,8 +65,9 @@
 			elm.fadeOut('fast').fadeIn('fast').fadeOut('fast').fadeIn('fast');
 		}
 	});
+*/
 
-})();
+//})();
 </script>
 
 <!-- 月間サマリーグラフ -->
