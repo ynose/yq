@@ -46,32 +46,31 @@ $(document).ready ->
   HTMLから呼び出せるようにclassで定義する
 ###
 class @ByMonth
-  graphHeight = 40 # 棒グラフの最大高さ
+  _graphHeight = 40 # 棒グラフの最大高さ
+  _hourMax = null
 
-  # 棒グラフを表示するために必要な高さを設定する
-  initHeight: (hourMax) ->
+  constructor: (hourMax) ->
+    _hourMax = hourMax
+    # 棒グラフを表示するために必要な高さを設定する
     # 時間数の高さ + アニメーション時の高さ増分(12)) + 棒グラフの最大高さ
-    $('#bymonth .outer').css height: ($('#bymonth .hour').height() + 12 + graphHeight) + "px"
+    $('#bymonth .outer').css height: ($('#bymonth .hour').height() + 12 + _graphHeight) + "px"
     # 高さの取得が終わったら非表示にする
-    $('#bymonth .hour').hide()
+    $('#bymonth .hour').hide()  
 
   # グラフを4月から順にアニメーション表示する
-  showMonth: (hourMax) ->
+  showMonth: ->
   	m = -1
   	$('#bymonth .inner').each (i) ->
     	hour = $(this).data('hour')
     	if hour > 0
     		m++; delay = 120 * m
     		$(this).delay(delay).animate
-      		height: (((hour / hourMax) * graphHeight)) + "px"
+      		height: (((hour / _hourMax) * _graphHeight)) + "px"
     		, 1000, "easeInOutBack"
     		# 数値はグラフよりも少し遅れて(delay + α)表示させる
     		$(this).prev('.hour').delay(delay + 700).fadeIn(350)
       return
     return
-
-@bymonth = new ByMonth()
-# HTMLからはbymonth.showMonth()のように呼び出す
 
 
 class @Flick
