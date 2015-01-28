@@ -37,39 +37,6 @@
 </div>
 
 
-<!-- フリック動作用JavaScript -->
-<script type="text/javascript">
-  flick.setting($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
-//(function(){
-/*
-	var fl = $('#flick-body');
-	var indelm = $('#indicator');
-	var indimg = indelm.find('img');
-
-	fl.flickSimple({
-		snap: 'first',
-		onResize: function() {
-			// update indicator
-			indelm.css( { width: (this.pageLength * 13) + 'px' } );
-		},
-		onChange: function() {
-			// move indicator
-			var pos = (this.page -1) * 13;
-			if ( this.android || ! this.webkit ) {
-				indimg.css( { left: pos +'px' } );
-			} else {
-				indimg.css( { webkitTransform:'translate3d('+ pos +'px,0,0)' } );
-			}
-		},
-		onClick: function(elm) {
-			elm.fadeOut('fast').fadeIn('fast').fadeOut('fast').fadeIn('fast');
-		}
-	});
-*/
-
-//})();
-</script>
-
 <!-- 月間サマリーグラフ -->
 <%= render 'bymonth' %>
 <br />
@@ -91,3 +58,12 @@
 
   </div>
 </div>
+
+
+<script type="text/javascript">
+  // ダッシュボード・フリック
+  var flick = new Flick($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
+  // グラフを4月から順にアニメーション表示する
+  var bymonth = new ByMonth(<%= @vacationHourOfMonth.max %>)
+  bymonth.showMonth();
+</script>
