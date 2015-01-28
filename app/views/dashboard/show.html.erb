@@ -58,12 +58,3 @@
 
   </div>
 </div>
-
-
-<script type="text/javascript">
-  // ダッシュボード・フリック
-  var flick = new Flick($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
-  // グラフを4月から順にアニメーション表示する
-  var bymonth = new ByMonth(<%= @vacationHourOfMonth.max %>)
-  bymonth.showMonth();
-</script>
