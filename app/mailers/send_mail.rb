@@ -6,6 +6,7 @@ class SendMail < ActionMailer::Base
   #
   #   en.send_mail.sample_mail.subject
   #
+  # 本文はapp/views/send_mail/sample_mail.text.erbにテンプレートを作成する
   def sample_mail
     @greeting = "Hi"
 
