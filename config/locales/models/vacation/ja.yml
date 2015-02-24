@@ -31,6 +31,8 @@ ja:
   destroy: "削除"
   back: "戻る"
   submit: "登録"
+  deliver: "メールを送る"
 
   destroy_confirm: "削除しますか?"
+  deliver_confirm: "メールを送りますか?"
   

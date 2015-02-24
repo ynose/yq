@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+
 #   get 'dashboard/show'
 
   resources :users
   resources :paid_vacations
   resources :vacations, :except => [:index, :show]  #index,#showアクションは不要
+  resources :send_mail, :only => [:new, :deliver]
 
   root 'dashboard#index'
   get '/dashboard/'                   => 'dashboard#index'
@@ -11,6 +13,8 @@ Rails.application.routes.draw do
   get '/vacations/:id/edit/:callback' => 'vacations#edit'
   get '/vacations/new/:user_id'       => 'vacations#new'
   get '/commute/:user_id/'            => 'commute#index'
+  get 'send_mail/:id'                 => 'send_mail#new'
+  post 'send_mail/deliver/:id'        => 'send_mail#deliver', as: 'send_mail_deliver'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

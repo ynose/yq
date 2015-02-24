@@ -1,0 +1,15 @@
+<% provide(:title, "メール送信") %>
+
+<%= form_tag('deliver/' + params[:id], :method => "post") do %>
+  To: <%= @to %><br>
+  From: <%= @from %><br>
+  Subject: <input name="subject" value="<%= @subject %>"></input>
+  <br>
+  Body: <textarea name="body"><%= @body %></textarea>
+  <br>
+
+  <%= submit_tag t('deliver'), method: :deliver, data: { confirm: t('deliver_confirm'), no_turbolink: true },
+                               :class => "btn btn-primary pull-right" %>
+
+  <%= link_to t('back'), edit_vacation_path(params[:id]), :class => "btn btn-default", data: { no_turbolink: true } %>
+<% end %>
