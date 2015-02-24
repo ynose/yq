@@ -48,7 +48,7 @@
     <!-- 追加ボタン -->
     <div class="row">
       <div class="col-xs-4 col-xs-offset-8 text-right">
-        <a href="<%= new_vacation_path + "?user_id=" + @user.id.to_s + "&callback_url=" + request.original_url%>" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"</span></a><br />
+        <a href="<%= new_vacation_path(@user.id.to_s) %>" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"</span></a><br />
         <br />
       </div>
     </div>

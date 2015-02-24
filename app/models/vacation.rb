@@ -12,6 +12,15 @@ class Vacation < ActiveRecord::Base
   
       return seconds / 60 / 60
   end
+
+  # 年度を返す
+  def year
+      yyyy = start_datetime.year
+      mm = start_datetime.month
+      yyyy -= 1 if mm <= 3
+
+      return yyyy
+  end
   
 end
 

@@ -20,9 +20,10 @@ class VacationsController < ApplicationController
     @vacation.start_datetime = datetime_parse("#{params[:date]} #{params[:start_time]}")
     @vacation.end_datetime = datetime_parse("#{params[:date]} #{params[:end_time]}")
     
+    redirect_path = dashboard_show_path(:user_id => @vacation.user_id, :year => @vacation.year)
     if @vacation.save
       flash[:success] = "Create Vacation!"
-      redirect_to params[:callback_url]
+      redirect_to redirect_path
     else
       render 'new'
     end
@@ -47,16 +48,18 @@ class VacationsController < ApplicationController
     @vacation.memo = vacation_params[:memo]
     @vacation.fixed = vacation_params[:fixed]
     
+    redirect_path = dashboard_show_path(:user_id => @vacation.user_id, :year => @vacation.year)
     if @vacation.save
-      redirect_to params[:callback_url]
+      redirect_to redirect_path
     end
   end
 
 
   def destroy
     @vacation = Vacation.find(params[:id])
+    redirect_path = dashboard_show_path(:user_id => @vacation.user_id, :year => @vacation.year)
     if @vacation.destroy  
-      redirect_to params[:callback_url]
+      redirect_to redirect_path
     end
   end
 

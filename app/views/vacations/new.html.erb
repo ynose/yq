@@ -2,4 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to t('back'), params[:callback_url], :class => "btn btn-default", data: { no_turbolink: true } %>
+<%= link_to t('back'), request.headers[:referer], :class => "btn btn-default", data: { no_turbolink: true } %>

@@ -2,8 +2,11 @@
 
 <%= render 'form' %>
 
-<%= link_to t('destroy'), vacation_path(:callback_url => params[:callback_url]), 
+<%= link_to t('back'), dashboard_show_path(:user_id => @vacation.user_id, :year => @vacation.year), :class => "btn btn-default", data: { no_turbolink: true } %>
+
+<%= link_to t('deliver'), new_send_mail_path(:id => params[:id]), 
+                          :class => "btn btn-warning", data: { no_turbolink: true } %>
+
+<%= link_to t('destroy'), vacation_path(), 
                        method: :delete, data: { confirm: t('destroy_confirm'), no_turbolink: true },
                        :class => "btn btn-danger pull-right" %>
-
-<%= link_to t('back'), params[:callback_url], :class => "btn btn-default", data: { no_turbolink: true } %>
