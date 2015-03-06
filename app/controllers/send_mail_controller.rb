@@ -11,6 +11,7 @@ class SendMailController < ApplicationController
 
     @to = MAIL_TO
     @from = user.email
+    @bcc = user.email
     @subject = "#{user.name} - 有休 [#{@startdate.strftime("%m").to_s}月#{@startdate.strftime("%d").to_s}日]"
     @body = "#{@startdate.strftime("%m").to_s} 月 #{@startdate.strftime("%d").to_s} 日"
   end
@@ -19,7 +20,7 @@ class SendMailController < ApplicationController
     vacation = Vacation.find(params[:id])
     user = User.find(vacation.user_id)
 
-    @result = SendMail.send_to_report(user.email, MAIL_TO, deliver_params[:subject], deliver_params[:body]).deliver
+    @result = SendMail.send_to_report(user.email, MAIL_TO, user.email, deliver_params[:subject], deliver_params[:body]).deliver
   end
 
   private
