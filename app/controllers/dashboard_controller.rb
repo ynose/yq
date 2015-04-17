@@ -11,6 +11,11 @@ class DashboardController < ApplicationController
 
     @user = User.find(user_id)
     @paid_vacation = PaidVacation.find_by(user_id: user_id, year: year)
+    #指定のユーザーIDと年度が見つからない場合は、とりあえず支給０で作成する
+    unless @paid_vacation then
+      PaidVacation.create(:user_id=>user_id, :year=>year, :hours=>0, :carryover_hours=>0)
+      @paid_vacation = PaidVacation.find_by(user_id: user_id, year: year)
+    end
 
     #指定年度の休暇リストを取得(指定年度(4月1日〜3月31日)の範囲を検索)
     @vacations = Vacation.where(["user_id = ? and ? <= start_datetime and end_datetime <= ?",
