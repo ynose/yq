@@ -1,4 +1,5 @@
 class VacationsController < ApplicationController
+  layout false
 
   def new
     @vacation = Vacation.new

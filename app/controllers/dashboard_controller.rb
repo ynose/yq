@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
 
+  layout 'onsen'
+
   def index
 
   end
@@ -33,6 +35,8 @@ class DashboardController < ApplicationController
       # 月ごとの有休消化時間を集計する
       @vacationHourOfMonth[vacation.start_datetime.strftime("%m").to_i] += vacation.hours
     end
+
+    render :action  => 'onsen'
   end
 
 end

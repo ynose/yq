@@ -1,0 +1,24 @@
+<ons-navigator var="myNavigator">
+<ons-page ng-controller="PageController">
+  <ons-toolbar>
+    <div class="center"><%= @paid_vacation.year %><small>年度</small></div>
+  </ons-toolbar>
+  <ons-list>
+
+    <% month = 0 %>
+
+    <% @vacations.each do |vacation| %>
+
+    <% if month != vacation.start_datetime.strftime("%m").to_i %>
+      <% month = vacation.start_datetime.strftime("%m").to_i %>
+      <ons-list-header><%= month %><small>月</small></ons-list-header>
+    <% end %>
+ 
+    <ons-list-item modifier="chevron" ng-click="showDetail('<%= edit_vacation_path(vacation.id.to_s) %>')">
+        <%= vacation.start_datetime %>
+    </ons-list-item>
+    <% end %>
+
+  </ons-list>
+</ons-page>
+</ons-navigator>
