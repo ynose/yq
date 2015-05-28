@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-#   get 'dashboard/show'
+#   get 'dashboard/show
 
   resources :users
   resources :paid_vacations
@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get '/commute/:user_id/'            => 'commute#index'
   get '/send_mail/:id'                => 'send_mail#new'
   post '/send_mail/deliver/:id'       => 'send_mail#deliver', as: 'send_mail_deliver'
+
+  get '/vacations/:user_id/:year'     => 'vacations#json'
+  post '/vacations/update_ajax/:id'   => 'vacations#update_ajax'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

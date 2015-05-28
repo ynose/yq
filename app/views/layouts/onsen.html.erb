@@ -23,21 +23,54 @@
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 
     <script type="text/javascript">
-        // ons.bootstrap();
         var module = ons.bootstrap('my-app', ['onsen']);
+
         module.controller('AppController', function($scope) { });
-        module.controller('PageController', function($scope) {
+        module.controller('VacationListController', function($scope) {
             ons.ready(function() {
                 // Init code here
+                $scope.fetchVacations();
             });
-            $scope.showDetail = function(url) {
+
+            $scope.fetchVacations = function() {
+                $.ajax({
+                    url: "/vacations/131/2014",
+                    dataType: "json",
+                    success: function(vacations){
+                        $scope.$apply(function(){
+                            $scope.vacations = vacations;
+                        });
+                    }
+                });
+            }
+
+            $scope.showDetail = function(id) {
                 var options = {
                     animation: 'slide', // アニメーションの種類
                     onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
                 };
-                myNavigator.pushPage(url, options);
+                myNavigator.pushPage('/vacations/' + id + '/edit', options);
             }
 
+        });
+
+        module.controller('VacationController', function($scope) {
+            $scope.updateVacations = function(id) {
+                $.ajax({
+                    url: "/vacations/update_ajax/" + id,
+                    type:'POST',
+                    data : {date : '2015/02/24', start_time: '09:00', end_time : '17:00', memo : 'test', fixed: fixed.isChecked() },
+                    success: function(vacations){
+                        var options = {
+                            animation: 'slide', // アニメーションの種類
+                            onTransitionEnd: function() {
+                            } // アニメーションが完了した際によばれるコールバック
+                        };
+                        myNavigator.popPage(options);
+                        
+                    }
+                });
+            }
         });
     </script>
 

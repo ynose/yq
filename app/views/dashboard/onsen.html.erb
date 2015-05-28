@@ -1,10 +1,11 @@
 <ons-navigator var="myNavigator">
-<ons-page ng-controller="PageController">
+<ons-page ng-controller="VacationListController">
   <ons-toolbar>
     <div class="center"><%= @paid_vacation.year %><small>年度</small></div>
   </ons-toolbar>
   <ons-list>
 
+<!--
     <% month = 0 %>
 
     <% @vacations.each do |vacation| %>
@@ -18,6 +19,11 @@
         <%= vacation.start_datetime %>
     </ons-list-item>
     <% end %>
+-->
+
+  <ons-list-item modifier="chevron" ng-click="showDetail(vacation.id)" ng-repeat="vacation in vacations">
+    {{vacation.id}} - {{vacation.start_datetime}}
+  </ons-list-item>
 
   </ons-list>
 </ons-page>

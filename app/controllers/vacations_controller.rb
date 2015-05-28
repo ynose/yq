@@ -51,7 +51,7 @@ class VacationsController < ApplicationController
     
     redirect_path = dashboard_show_path(:user_id => @vacation.user_id, :year => @vacation.year)
     if @vacation.save
-      redirect_to redirect_path
+       redirect_to redirect_path
     end
   end
 
@@ -63,6 +63,38 @@ class VacationsController < ApplicationController
       redirect_to redirect_path
     end
   end
+
+
+  def json
+    user_id = params[:user_id]
+    year = params[:year]            # 年度のはじめ月(４月)
+    year_end = (year.to_i + 1).to_s # 年度のおわり月(３月)
+
+    #指定年度の休暇リストを取得(指定年度(4月1日〜3月31日)の範囲を検索)
+    vacations = Vacation.where(["user_id = ? and ? <= start_datetime and end_datetime <= ?",
+                               user_id,
+                               year + '-04-01 00:00:00',
+                               year_end + '-03-31 23:59:59'])
+                               .order("start_datetime desc")
+
+    render :json => vacations
+  end
+
+  def update_ajax
+    @vacation = Vacation.find(params[:id])
+
+    # 日付と開始時刻で開始日時、日付と終了時刻で終了日時の値を作成する
+    @vacation.start_datetime = datetime_parse("#{params[:date]} #{params[:start_time]}")
+    @vacation.end_datetime = datetime_parse("#{params[:date]} #{params[:end_time]}")
+    
+    @vacation.memo = params[:memo]
+    @vacation.fixed = params[:fixed]
+    
+    @vacation.save
+
+    render :nothing => true
+  end
+
 
   private
     def vacation_params

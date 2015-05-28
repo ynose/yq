@@ -49,7 +49,8 @@
   <!-- 確定 -->
   <div class="checkbox">
     <label>
-      <%= f.check_box :fixed %><%= f.label :fixed %>
+      <%= f.label :fixed %>
+      <ons-switch var="fixed" <%= @vacation.fixed ? "checked": "" %>></ons-switch>
     </label>
   </div>
 
