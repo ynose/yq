@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/send_mail/deliver/:id'       => 'send_mail#deliver', as: 'send_mail_deliver'
 
   get '/vacations/:user_id/:year'     => 'vacations#json'
+  post '/vacations/create_ajax'       => 'vacations#create_ajax'
   post '/vacations/update_ajax/:id'   => 'vacations#update_ajax'
 
 

@@ -80,13 +80,27 @@ class VacationsController < ApplicationController
     render :json => vacations
   end
 
+  def create_ajax
+    @vacation = Vacation.new()
+    
+    # 日付と開始時刻で開始日時、日付と終了時刻で終了日時の値を作成する
+    @vacation.user_id = params[:user_id]
+    @vacation.start_datetime = datetime_parse("#{params[:date]} #{params[:start_time]}")
+    @vacation.end_datetime = datetime_parse("#{params[:date]} #{params[:end_time]}")
+    @vacation.memo = params[:memo]
+    @vacation.fixed = params[:fixed]
+    
+    @vacation.save
+
+    render :nothing => true
+  end
+
   def update_ajax
     @vacation = Vacation.find(params[:id])
 
     # 日付と開始時刻で開始日時、日付と終了時刻で終了日時の値を作成する
     @vacation.start_datetime = datetime_parse("#{params[:date]} #{params[:start_time]}")
     @vacation.end_datetime = datetime_parse("#{params[:date]} #{params[:end_time]}")
-    
     @vacation.memo = params[:memo]
     @vacation.fixed = params[:fixed]
     

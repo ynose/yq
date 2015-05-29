@@ -26,15 +26,16 @@
         var module = ons.bootstrap('my-app', ['onsen']);
 
         module.controller('AppController', function($scope) { });
-        module.controller('VacationListController', function($scope) {
+
+        module.controller('DashboardController', function($scope) {
             ons.ready(function() {
                 // Init code here
-                $scope.fetchVacations();
+                $scope.fetchVacations(131, <%= @paid_vacation.year %>);
             });
 
-            $scope.fetchVacations = function() {
+            $scope.fetchVacations = function(userId, year) {
                 $.ajax({
-                    url: "/vacations/131/2014",
+                    url: "/vacations/" + userId + "/" + year,
                     dataType: "json",
                     success: function(vacations){
                         $scope.$apply(function(){
@@ -44,33 +45,64 @@
                 });
             }
 
-            $scope.showDetail = function(id) {
+            $scope.showDetail = function(vacationId) {
                 var options = {
                     animation: 'slide', // アニメーションの種類
                     onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
                 };
-                myNavigator.pushPage('/vacations/' + id + '/edit', options);
+                myNavigator.pushPage('/vacations/' + vacationId + '/edit', options);
+            }
+
+            $scope.addNewVacation = function(userId) {
+                var options = {
+                    animation: 'lift', // アニメーションの種類
+                    onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
+                };
+                myNavigator.pushPage('/vacations/new/' + userId, options);
             }
 
         });
 
         module.controller('VacationController', function($scope) {
-            $scope.updateVacations = function(id) {
+            $scope.createVacations = function(userId) {
                 $.ajax({
-                    url: "/vacations/update_ajax/" + id,
+                    url: "/vacations/create_ajax",
                     type:'POST',
-                    data : {date : '2015/02/24', start_time: '09:00', end_time : '17:00', memo : 'test', fixed: fixed.isChecked() },
+                    data : {
+                        user_id: userId,
+                        date : $('#date').val(), 
+                        start_time: $('#start_time').val(), 
+                        end_time : $('#end_time').val(), 
+                        memo : $('#memo').val(), 
+                        fixed: fixed.isChecked()
+                    },
                     success: function(vacations){
-                        var options = {
-                            animation: 'slide', // アニメーションの種類
-                            onTransitionEnd: function() {
-                            } // アニメーションが完了した際によばれるコールバック
-                        };
-                        myNavigator.popPage(options);
-                        
+                        myNavigator.popPage();
                     }
                 });
             }
+
+            $scope.updateVacations = function(vacationId) {
+                $.ajax({
+                    url: "/vacations/update_ajax/" + vacationId,
+                    type:'POST',
+                    data : {
+                        date : $('#date').val(), 
+                        start_time: $('#start_time').val(), 
+                        end_time : $('#end_time').val(), 
+                        memo : $('#memo').val(), 
+                        fixed: fixed.isChecked()
+                    },
+                    success: function(vacations){
+                        myNavigator.popPage();
+                    }
+                });
+            }
+
+            $scope.dismissView = function() {
+                myNavigator.popPage();
+            }
+
         });
     </script>
 
