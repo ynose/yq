@@ -24,18 +24,23 @@
 
     <script type="text/javascript">
         var module = ons.bootstrap('my-app', ['onsen']);
+        var userId = <%= @user.id %>;
+        var year = <%= @paid_vacation.year %>;
 
         module.controller('AppController', function($scope) { });
 
         module.controller('DashboardController', function($scope) {
+
             ons.ready(function() {
-                // Init code here
-                $scope.fetchVacations(131, <%= @paid_vacation.year %>);
+                $scope.userId = userId;
+                $scope.year = year;
+
+                $scope.fetchVacations();
             });
 
-            $scope.fetchVacations = function(userId, year) {
+            $scope.fetchVacations = function() {
                 $.ajax({
-                    url: "/vacations/" + userId + "/" + year,
+                    url: "/vacations/" + $scope.userId + "/" + $scope.year,
                     dataType: "json",
                     success: function(vacations){
                         $scope.$apply(function(){
@@ -45,31 +50,46 @@
                 });
             }
 
-            $scope.showDetail = function(vacationId) {
+            $scope.editVacation = function(vacationId) {
                 var options = {
-                    animation: 'slide', // アニメーションの種類
-                    onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
+                    animation: 'slide',                 // アニメーションの種類
+                    onTransitionEnd: function() {},     // アニメーションが完了した際によばれるコールバック
+                    onSaveCallback: function() {
+                        myNavigator.popPage();
+                        $scope.fetchVacations();
+                    }
                 };
                 myNavigator.pushPage('/vacations/' + vacationId + '/edit', options);
             }
 
-            $scope.addNewVacation = function(userId) {
+            $scope.addNewVacation = function() {
                 var options = {
-                    animation: 'lift', // アニメーションの種類
-                    onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
+                    animation: 'lift',                  // アニメーションの種類
+                    onTransitionEnd: function() {},     // アニメーションが完了した際によばれるコールバック
+                    onSaveCallback: function() {
+                        myNavigator.popPage();
+                        $scope.fetchVacations();
+                    }
                 };
-                myNavigator.pushPage('/vacations/new/' + userId, options);
+                myNavigator.pushPage('/vacations/new/' + $scope.userId, options);
             }
 
         });
 
+
         module.controller('VacationController', function($scope) {
-            $scope.createVacations = function(userId) {
+            
+            ons.ready(function() {
+                $scope.userId = userId;
+                $scope.year = year;
+            });
+
+            $scope.createVacations = function() {
                 $.ajax({
                     url: "/vacations/create_ajax",
                     type:'POST',
-                    data : {
-                        user_id: userId,
+                    data: {
+                        user_id: $scope.userId,
                         date : $('#date').val(), 
                         start_time: $('#start_time').val(), 
                         end_time : $('#end_time').val(), 
@@ -77,7 +97,8 @@
                         fixed: fixed.isChecked()
                     },
                     success: function(vacations){
-                        myNavigator.popPage();
+                        var page = myNavigator.getCurrentPage();
+                        page.options.onSaveCallback();
                     }
                 });
             }
@@ -86,7 +107,7 @@
                 $.ajax({
                     url: "/vacations/update_ajax/" + vacationId,
                     type:'POST',
-                    data : {
+                    data: {
                         date : $('#date').val(), 
                         start_time: $('#start_time').val(), 
                         end_time : $('#end_time').val(), 
@@ -94,7 +115,8 @@
                         fixed: fixed.isChecked()
                     },
                     success: function(vacations){
-                        myNavigator.popPage();
+                        var page = myNavigator.getCurrentPage();
+                        page.options.onSaveCallback();
                     }
                 });
             }

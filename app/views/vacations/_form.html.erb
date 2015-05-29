@@ -1,89 +1,32 @@
-<%= form_for(@vacation, :html => {:role => "form"} ) do |f| %>
-  <% if @vacation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@vacation.errors.count, "error") %> prohibited this user from being saved:</h2>
+<br>
 
-      <ul>
-      <% @vacation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<!-- 日付 -->
+<div>
+  <label>日付</label>
+  <input class="text-input" id="date" type="date" value="<%= @vacation.start_datetime.strftime("%Y-%m-%d") %>" step="1">
+</div>
 
-  <br>
-  <!-- ユーザー -->
-  <%= f.hidden_field :user_id %>
+<!-- 開始時刻と終了時刻 -->
+<div>
+  <label>開始</label>
+  <input class="text-input" id="start_time" type="time" value="<%= @vacation.start_datetime.strftime("%H:%M") %>" step="180">
+</div>
+<div>
+  <label>終了</label>
+  <input class="text-input" id="end_time" type="time" value="<%= @vacation.end_datetime.strftime("%H:%M") %>" step="180">
+</div>
 
-  <!-- 日付 -->
-  <div>
-    <label>日付</label>
-    <input class="text-input" id="date" type="date" value="<%= @vacation.start_datetime.strftime("%Y-%m-%d") %>" step="1">
-  </div>
-  <!--
-  <div class="form-group">
-    <%= f.label :start_datetime %>
-    <input name="date" type="date" class="form-control" value="<%= @vacation.start_datetime.strftime("%Y-%m-%d") %>" step="1" />
-  </div>
-   -->
+<!-- メモ -->
+<div>
+  <label>メモ</label>
+  <input class="text-input" id="memo" type="test" value="<%= @vacation.memo %>">
+</div>
 
-  <!-- 開始時刻と終了時刻 -->
-  <div>
-    <label>開始</label>
-    <input class="text-input" id="start_time" type="time" value="<%= @vacation.start_datetime.strftime("%H:%M") %>" step="180">
-  </div>
-  <div>
-    <label>終了</label>
-    <input class="text-input" id="end_time" type="time" value="<%= @vacation.end_datetime.strftime("%H:%M") %>" step="180">
-  </div>
-  <!--
-  <div class="form-group">
-    <label>時刻</label>
-    <div class="input-group">
-      <div class="input-group-addon">開始</div>
-      <input name="start_time" type="time" class="form-control" value="<%= @vacation.start_datetime.strftime("%H:%M") %>" step="180" />
-      <div class="input-group-addon">終了</div>
-      <input name="end_time" type="time" class="form-control" value="<%= @vacation.end_datetime.strftime("%H:%M") %>" step="180" />
-    </div>
-  </div>
-  -->
-
-  <!-- メモ -->
-  <div>
-    <label>メモ</label>
-    <input class="text-input" id="memo" type="test" value="<%= @vacation.memo %>">
-  </div>
-
-  <!--
-  <%= f.label :memo %>
-  <div class="input-group">
-    <%= f.text_field :memo, :id => "memo", :class => "form-control" %>
-    <div class="input-group-btn">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-      <ul id="memo-list" class="dropdown-menu dropdown-menu-right" role="menu">
-        <% @memos.each do |memo| %>
-        <li><a href="#"><%= memo.memo %></a></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  -->
-
-  <!-- 確定 -->
-  <label>確定</label>
-  <ons-switch var="fixed" <%= @vacation.fixed ? "checked": "" %>></ons-switch>
-
-  <input type="hidden" name="callback_url" value="<%= params[:callback_url] %>" />
-
-  <br />
-
-  <!-- 登録ボタン -->
-  <!--
-  <%= f.submit t('submit'), :class => "btn btn-primary btn-block btn-lg",  data: { no_turbolink: true } %>
-  -->
+<!-- 確定 -->
+<label>確定</label>
+<ons-switch var="fixed" <%= @vacation.fixed ? "checked": "" %>></ons-switch>
 
 <br>
-<% end %>
 
 <script type="text/javascript">
   $(document).ready(function(){

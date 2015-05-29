@@ -1,9 +1,9 @@
 <ons-navigator var="myNavigator">
 <ons-page ng-controller="DashboardController">
   <ons-toolbar>
-    <div class="center"><%= @user.id %> - <%= @paid_vacation.year %><small>年度</small></div>
+    <div class="center">{{userId}} - {{year}}<small>年度</small></div>
     <div class="right">
-      <ons-toolbar-button ng-click="addNewVacation(<%= @user.id %>)"><ons-icon icon="fa-plus" size="28px"></ons-icon></ons-toolbar-button>
+      <ons-toolbar-button ng-click="addNewVacation()"><ons-icon icon="fa-plus" size="28px"></ons-icon></ons-toolbar-button>
     </div>
   </ons-toolbar>
   <ons-list>
@@ -24,7 +24,7 @@
     <% end %>
 -->
 
-  <ons-list-item modifier="chevron" ng-click="showDetail(vacation.id)" ng-repeat="vacation in vacations">
+  <ons-list-item modifier="chevron" ng-click="editVacation(vacation.id)" ng-repeat="vacation in vacations">
     {{vacation.id}} - {{vacation.start_datetime}}
   </ons-list-item>
 
