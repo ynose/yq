@@ -1,12 +1,14 @@
 <%# 消化有休リスト %>
-<div class="row">
+<div class="_row">
   <div class="col-xs-12">
-    <table class="table table-striped table-hover">
+    <!-- <table class="table table-striped table-hover"> -->
       <% youbi = %w[日 月 火 水 木 金 土] %>
       <% month = 0 %>
       <% vacation_hours_sum = 0 %>
       <% @vacations.each do |vacation| %>
       <tr>
+      <ons-list-item modifier="chevron" ng-click="editVacation(<%= vacation.id.to_s %>)">
+
         <!-- 月/日 曜日 -->
         <td>
         <% m = vacation.start_datetime.strftime("%m").to_i %>
@@ -63,12 +65,9 @@
             <% end %>
           </div>
         </td>
-        <!-- 編集ボタン -->
-        <td class="text-right">
-          <a href="<%= edit_vacation_path(vacation.id.to_s) %>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-        </td>
+      </ons-list-item>
       </tr>
       <% end %>
-    </table>
+    <!-- </table> -->
   </div>
 </div>

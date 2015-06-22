@@ -21,7 +21,24 @@ class Vacation < ActiveRecord::Base
 
       return yyyy
   end
-  
+
+  def yyyy
+      return start_datetime.year
+  end
+
+  def mm
+      return start_datetime.month
+  end
+
+  def dd
+      return start_datetime.day
+  end
+
+  def weekday
+      youbi = %w[日 月 火 水 木 金 土]
+      return youbi[start_datetime.wday]
+  end
+
 end
 
 # == Schema Information

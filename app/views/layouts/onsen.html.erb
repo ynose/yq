@@ -18,9 +18,19 @@
     <![endif]-->
 
     <!-- Latest compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Latest compiled and minified JavaScript -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // ダッシュボード・フリック
+            var flick = new Flick($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
+            // グラフを4月から順にアニメーション表示する
+            var bymonth = new ByMonth(<%= @vacationHourOfMonth.max %>)
+            bymonth.showMonth();
+        });
+    </script>
 
     <script type="text/javascript">
         var module = ons.bootstrap('my-app', ['onsen']);

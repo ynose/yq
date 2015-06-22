@@ -1,7 +1,7 @@
 <%# 月間サマリーグラフ %>
 <div id="bymonth">
 
-  <div class="row">
+  <div class="_row">
     <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %>
     <div class="col-xs-1 nopadding">
       <div class="outer">
@@ -14,7 +14,7 @@
     <% end %>
   </div>
 
-  <div class="row">
+  <div class="_row">
     <% for m in [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3] do %>
     <% targetmonth = Date::new(@paid_vacation.year + (4 <= m ? 0 : 1), m , 1) %>
     <% thismonth = Date::new(Date.today.year, Date.today.month, 1) %>

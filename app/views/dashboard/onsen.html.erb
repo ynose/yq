@@ -6,7 +6,44 @@
       <ons-toolbar-button ng-click="addNewVacation()"><ons-icon icon="fa-plus" size="28px"></ons-icon></ons-toolbar-button>
     </div>
   </ons-toolbar>
+
   <ons-list>
+
+<div class="_row">
+  <div id="dashboard" class="col-xs-12">
+
+    <% if @paid_vacation != nil then %>
+    <div id="flick">
+      <div id="flick-body">
+        <ul>
+  
+        <!-- ページ数はdashboard.css.scssの$pagesで指定
+          ページ数は偶数にすること。奇数ページだと１ページあたりのwidth計算で端数がでるためうまくいかない -->
+  
+        <!-- 1ページ -->
+        <li>
+          <%= render 'remain' %>
+        </li>
+  
+        <!-- 2ページ -->
+        <li>
+          <%= render 'detail' %>
+        </li>
+  
+        </ul>
+  
+      </div><!-- flick -->
+     <% end %>
+  
+      <!-- ページインジケーター -->
+      <div id="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
+    </div>
+  </div>
+</div>
+
+<!-- 月間サマリーグラフ -->
+<%= render 'bymonth' %>
+<br />
 
 <!--
     <% month = 0 %>
@@ -25,7 +62,7 @@
 -->
 
   <ons-list-item modifier="chevron" ng-click="editVacation(vacation.id)" ng-repeat="vacation in vacations">
-    {{vacation.id}} - {{vacation.start_datetime}}
+    {{vacation.id}} - {{vacation.yyyy}} / {{vacation.mm}} / {{vacation.dd}} ({{vacation.weekday}}) {{vacation.memo}}
   </ons-list-item>
 
   </ons-list>
