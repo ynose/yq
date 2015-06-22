@@ -77,11 +77,7 @@ class VacationsController < ApplicationController
                                year_end + '-03-31 23:59:59'])
                                .order("start_datetime desc")
 
-#    render :json => vacations
-
-
- 
-    render :json => vacations.as_json(methods: ['yyyy', 'mm', 'dd', 'weekday'])   # jsonで返すメソッドを追加指定
+    render :json => vacations.as_json(methods: ['yyyy', 'mm', 'dd', 'weekday', 'hours'])   # jsonで返すメソッドを追加指定
 
   end
 
