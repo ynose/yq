@@ -20,7 +20,7 @@ $(document).ready ->
   clearInterval repeatMonthAnimate
   repeatMonthAnimate = setInterval ->
     $('#bymonth .inner').each (i) ->
-    	if $(@).data('hour') > 0
+    	if Number($(@).prev('.hour').text()) > 0
     		$(@).delay(120 * i).animate 
       		height: "+=10px"
      		, 400, "easeInOutQuad", ->
@@ -78,7 +78,9 @@ class @ByMonth
     _hourMax = hourMax
     # 棒グラフを表示するために必要な高さを設定する
     # 時間数の高さ + アニメーション時の高さ増分(12)) + 棒グラフの最大高さ
-    $('#bymonth .outer').css height: ($('#bymonth .hour').height() + 12 + _graphHeight) + "px"
+    # $('#bymonth .outer').css height: ($('#bymonth .hour').height() + 12 + _graphHeight) + "px"
+    $('#bymonth .outer').css height: (20 + 12 + _graphHeight) + "px"
+
     # 高さの取得が終わったら非表示にする
     $('#bymonth .hour').hide()  
 
@@ -86,7 +88,8 @@ class @ByMonth
   showMonth: ->
     m = -1
     $('#bymonth .inner').each (i) ->
-      hour = $(@).data('hour')
+      # hour = $(@).data('hour')
+      hour = Number($(@).prev('.hour').text())
       if hour > 0
         m++; delay = 120 * m
         $(@).delay(delay).animate

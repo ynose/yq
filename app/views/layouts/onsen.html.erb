@@ -23,30 +23,46 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            // ダッシュボード・フリック
-            var flick = new Flick($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
-            // グラフを4月から順にアニメーション表示する
-            var bymonth = new ByMonth(<%= @vacationHourOfMonth.max %>)
-            bymonth.showMonth();
-        });
-    </script>
-
-    <script type="text/javascript">
         var module = ons.bootstrap('my-app', ['onsen']);
         var userId = <%= @user.id %>;
         var year = <%= @paid_vacation.year %>;
 
         module.controller('AppController', function($scope) { });
 
-        module.controller('DashboardController', function($scope) {
+        module.controller('DashboardController', function($scope, $timeout) {
 
             ons.ready(function() {
                 $scope.userId = userId;
                 $scope.year = year;
 
+                $scope.fetchRemain();
                 $scope.fetchVacations();
             });
+
+            $scope.fetchRemain = function() {
+                $.ajax({
+                    url: "/dashboard/remain_ajax/" + $scope.userId + "/" + $scope.year,
+                    dataType: "json",
+                    success: function(remain){
+                        var promise = $timeout(function() {
+                            $scope.$apply(function(){
+                                $scope.remain = remain;
+                            });
+                        }, 0);
+                        promise.then(function() {
+                            // 読み込み終了後、グラフを4月から順にアニメーション表示する
+                            var bymonth = new ByMonth(<%= @vacationHourOfMonth.max %>)
+                            bymonth.showMonth();
+                        });
+
+                        $scope.cancel = function() {
+                            $timeout.cancel(promise);
+                            alert('cancel');
+                        };
+                    }
+
+                });
+            }
 
             $scope.fetchVacations = function() {
                 $.ajax({
@@ -66,6 +82,7 @@
                     onTransitionEnd: function() {},     // アニメーションが完了した際によばれるコールバック
                     onSaveCallback: function() {
                         myNavigator.popPage();
+                        $scope.fetchRemain();
                         $scope.fetchVacations();
                     }
                 };
@@ -78,6 +95,7 @@
                     onTransitionEnd: function() {},     // アニメーションが完了した際によばれるコールバック
                     onSaveCallback: function() {
                         myNavigator.popPage();
+                        $scope.fetchRemain();
                         $scope.fetchVacations();
                     }
                 };
@@ -137,6 +155,14 @@
 
         });
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // ダッシュボード・フリック
+            var flick = new Flick($('#flick-body'), $('#indicator'), $('#indicator').find('img'));
+        });
+    </script>
+
 
 </head>
 <body ng-controller="AppController">

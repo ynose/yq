@@ -65,7 +65,7 @@ class VacationsController < ApplicationController
   end
 
 
-  def json
+  def load_ajax
     user_id = params[:user_id]
     year = params[:year]            # 年度のはじめ月(４月)
     year_end = (year.to_i + 1).to_s # 年度のおわり月(３月)

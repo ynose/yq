@@ -10,12 +10,14 @@ Rails.application.routes.draw do
   root 'dashboard#index'
   get '/dashboard/'                   => 'dashboard#index'
   get '/dashboard/:user_id/:year'     => 'dashboard#show', as: 'dashboard_show'
+  get '/dashboard/remain_ajax/:user_id/:year' => 'dashboard#remain_ajax'
+
   get '/vacations/new/:user_id'       => 'vacations#new',  as: 'new_vacation'
   get '/commute/:user_id/'            => 'commute#index'
   get '/send_mail/:id'                => 'send_mail#new'
   post '/send_mail/deliver/:id'       => 'send_mail#deliver', as: 'send_mail_deliver'
 
-  get '/vacations/:user_id/:year'     => 'vacations#json'
+  get '/vacations/:user_id/:year'     => 'vacations#load_ajax'
   post '/vacations/create_ajax'       => 'vacations#create_ajax'
   post '/vacations/update_ajax/:id'   => 'vacations#update_ajax'
 

@@ -2,21 +2,16 @@
 <div class="_row">
   <div class="col-xs-12">
 
-    <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
-    <% remain_days = ((paid_vacation_total_hours - @vacation_hours_total) / 8).to_i  %>
-    <% remain_hours = ((paid_vacation_total_hours - @vacation_hours_total) - (remain_days * 8)).to_i  %>
-
     <!-- のこり日数(時間を日数に換算) -->
     <h4 id="remain-caption" class="text-center" style="">のこり</h4>
     <h1 id="remind-days" class="text-center">
-      &nbsp;&nbsp;<strong><%= remain_days %></strong><small>日</small>
+      &nbsp;&nbsp;<strong>{{remain.remain_days}}</strong><small>日</small>
+
     </h1>
 
     <!-- のこり端数時間 -->
     <h5 id="remind-hours" class="text-center">
-      <% if remain_hours > 0 %>
-        &nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;<%= remain_hours %><small>&nbsp;時間</small>
-      <% end %>
+        <span ng-class="{'hidden': (remain.remain_hours == 0)}">&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;{{remain.remain_hours}}<small>&nbsp;時間</small></span>
       <br />
     </h5>
     <br/>
@@ -41,6 +36,7 @@
         <% hours = @vacation_hours_total - (carryover_hours + over_hours) %>
 
         <%# 分母 %>
+        <% paid_vacation_total_hours = @paid_vacation.hours + @paid_vacation.carryover_hours %>
         <% total_hours = (paid_vacation_total_hours + over_hours) %>
 
         <%# 消化率 %>
@@ -75,7 +71,7 @@
     </div>
     <div class="col-xs-2" style="padding: 1px 0 0 6px; ">
       <!-- 全休暇日数 -->
-      <nobr><span class="progress-caption"><%= (paid_vacation_total_hours / 8).to_i %><small>日</small></span></nobr>
+      <nobr><span class="progress-caption">{{remain.paid_vacation_total_hours / 8 | number:0}}<small>日</small></span></nobr>
     </div>
 
 </div>
