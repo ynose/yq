@@ -32,16 +32,13 @@
         module.controller('DashboardController', function($scope, $timeout) {
 
             ons.ready(function() {
-                $scope.userId = userId;
-                $scope.year = year;
-
                 $scope.fetchRemain();
                 $scope.fetchVacations();
             });
 
             $scope.fetchRemain = function() {
                 $.ajax({
-                    url: "/dashboard/remain_ajax/" + $scope.userId + "/" + $scope.year,
+                    url: "/dashboard/remain_ajax/" + userId + "/" + year,
                     dataType: "json",
                     success: function(remain){
                         var promise = $timeout(function() {
@@ -51,7 +48,7 @@
                         }, 0);
                         promise.then(function() {
                             // 読み込み終了後、グラフを4月から順にアニメーション表示する
-                            var bymonth = new ByMonth($scope.remain.vacationHour_max)
+                            var bymonth = new ByMonth($scope.remain.vacationHour_max)   // ByMonthはdashboard.js.coffeeで定義されているクラス
                             bymonth.showMonth();
                         });
 
@@ -66,7 +63,7 @@
 
             $scope.fetchVacations = function() {
                 $.ajax({
-                    url: "/vacations/" + $scope.userId + "/" + $scope.year,
+                    url: "/vacations/" + userId + "/" + year,
                     dataType: "json",
                     success: function(vacations){
                         $scope.$apply(function(){
@@ -99,7 +96,7 @@
                         $scope.fetchVacations();
                     }
                 };
-                myNavigator.pushPage('/vacations/new/' + $scope.userId, options);
+                myNavigator.pushPage('/vacations/new/' + userId, options);
             }
 
         });
@@ -108,8 +105,6 @@
         module.controller('VacationController', function($scope) {
             
             ons.ready(function() {
-                $scope.userId = userId;
-                $scope.year = year;
             });
 
             $scope.createVacations = function() {
@@ -117,7 +112,7 @@
                     url: "/vacations/create_ajax",
                     type:'POST',
                     data: {
-                        user_id: $scope.userId,
+                        user_id: userId,
                         date : $('#date').val(), 
                         start_time: $('#start_time').val(), 
                         end_time : $('#end_time').val(), 

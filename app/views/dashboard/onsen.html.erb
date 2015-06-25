@@ -1,7 +1,7 @@
 <ons-navigator var="myNavigator">
 <ons-page ng-controller="DashboardController">
   <ons-toolbar>
-    <div class="center">{{userId}} - {{year}}<small>年度</small></div>
+    <div class="center"><%= @user.id %> - <%= @year %><small>年度</small></div>
     <div class="right">
       <ons-toolbar-button ng-click="addNewVacation()"><ons-icon icon="fa-plus" size="28px"></ons-icon></ons-toolbar-button>
     </div>

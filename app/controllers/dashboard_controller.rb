@@ -60,7 +60,6 @@ class DashboardController < ApplicationController
     year = params[:year]            # 年度のはじめ月(４月)
     year_end = (year.to_i + 1).to_s # 年度のおわり月(３月)
 
-    @user = User.find(user_id)
     paid_vacation = PaidVacation.find_by(user_id: user_id, year: year)
     #指定のユーザーIDと年度が見つからない場合は、とりあえず支給０で作成する
     unless paid_vacation then
