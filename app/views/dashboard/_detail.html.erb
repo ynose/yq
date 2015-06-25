@@ -1,46 +1,45 @@
 <%# 詳細表示 %>
 <div class="row text-center">
   <div class="col-xs-10 col-xs-offset-1">
-    <%= @user.id %>: <%= link_to @user.name, @user %>
+    {{userId}}: <%= link_to @user.name, @user %>
     <br />
     <!--<a href="mailto:<%= @user.email %>" class="small"><%= @user.email %></a>-->
   </div>
 </div>
-<% if @paid_vacation != nil then %>
+
 <div class="row text-center">
   <div class="col-xs-9 col-xs-offset-3">
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">繰り越し</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @paid_vacation.carryover_hours %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static">{{remain.carryover_hours | number: 1}}&nbsp;<small>時間</small></p>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">支給</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @paid_vacation.hours %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static">{{remain.paid_vacation_hours | number: 1}}&nbsp;<small>時間</small></p>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">合計</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @paid_vacation.carryover_hours + @paid_vacation.hours %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static">{{remain.paid_vacation_total_hours | number: 1}}&nbsp;<small>時間</small></p>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">消化</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @vacation_hours_total %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static">{{remain.vacation_total_hours | number: 1}}&nbsp;<small>時間</small></p>
         </div>
       </div>
       <div class="input-group">
         <div class="input-group-addon input-sm detail-caption">残り</div>
         <div class="form-control input-sm detail-value">
-          <p class="form-control-static"><%= @paid_vacation.hours + @paid_vacation.carryover_hours - @vacation_hours_total %>&nbsp;<small>時間</small></p>
+          <p class="form-control-static">{{remain.paid_vacation_total_hours - remain.vacation_total_hours | number: 1}}&nbsp;<small>時間</small></p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<% end %>

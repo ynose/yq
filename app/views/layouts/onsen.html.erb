@@ -25,7 +25,7 @@
     <script type="text/javascript">
         var module = ons.bootstrap('my-app', ['onsen']);
         var userId = <%= @user.id %>;
-        var year = <%= @paid_vacation.year %>;
+        var year = <%= @year %>;
 
         module.controller('AppController', function($scope) { });
 
@@ -51,7 +51,7 @@
                         }, 0);
                         promise.then(function() {
                             // 読み込み終了後、グラフを4月から順にアニメーション表示する
-                            var bymonth = new ByMonth(<%= @vacationHourOfMonth.max %>)
+                            var bymonth = new ByMonth($scope.remain.vacationHour_max)
                             bymonth.showMonth();
                         });
 

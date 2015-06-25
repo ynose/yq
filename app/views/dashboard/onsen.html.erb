@@ -12,7 +12,6 @@
 <div class="_row">
   <div id="dashboard" class="col-xs-12">
 
-    <% if @paid_vacation != nil then %>
     <div id="flick">
       <div id="flick-body">
         <ul>
@@ -33,7 +32,6 @@
         </ul>
   
       </div><!-- flick -->
-     <% end %>
   
       <!-- ページインジケーター -->
       <div id="indicator"><%= image_tag "indicator.png", :size => "13x5", :alt => "" %></div>
@@ -44,22 +42,6 @@
 <!-- 月間サマリーグラフ -->
 <%= render 'bymonth' %>
 <br />
-
-<!--
-    <% month = 0 %>
-
-    <% @vacations.each do |vacation| %>
-
-    <% if month != vacation.start_datetime.strftime("%m").to_i %>
-      <% month = vacation.start_datetime.strftime("%m").to_i %>
-      <ons-list-header><%= month %><small>月</small></ons-list-header>
-    <% end %>
- 
-    <ons-list-item modifier="chevron" ng-click="showDetail('<%= edit_vacation_path(vacation.id.to_s) %>')">
-        <%= vacation.start_datetime %>
-    </ons-list-item>
-    <% end %>
--->
 
   <ons-list-item modifier="chevron" ng-click="editVacation(vacation.id)" ng-repeat="vacation in vacations">
     <div class="col-xs-4"><span class="vacation month">{{vacation.mm}} / </span><span class="vacation date"><strong>{{vacation.dd}}</strong></span> <span class="vacation weekday">{{vacation.weekday}}</span></div>
