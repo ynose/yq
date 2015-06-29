@@ -144,6 +144,32 @@
                 });
             }
 
+            $scope.deleteVacations = function(vacationId) {
+                ons.notification.confirm({
+                    message: '削除しますか？',
+                    title: '',
+                    buttonLabels: ['はい', 'いいえ'],
+                    animation: 'default',
+                    primaryButtonIndex: 1,
+                    cancelelable: true,
+                    callback: function(index) {
+                        // -1: キャンセルされた
+                        // 0-: 左から0ではじまるボタン番号
+                        if (index == 0) {
+                            $.ajax({
+                                url: "/vacations/delete_ajax/" + vacationId,
+                                type:'POST',
+                                success: function(vacations){
+                                    var page = myNavigator.getCurrentPage();
+                                    page.options.onSaveCallback();
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+
             $scope.dismissView = function() {
                 myNavigator.popPage();
             }

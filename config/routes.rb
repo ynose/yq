@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/vacations/:user_id/:year'     => 'vacations#load_ajax'
   post '/vacations/create_ajax'       => 'vacations#create_ajax'
   post '/vacations/update_ajax/:id'   => 'vacations#update_ajax'
+  post '/vacations/delete_ajax/:id'   => 'vacations#destroy_ajax'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

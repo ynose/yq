@@ -110,6 +110,12 @@ class VacationsController < ApplicationController
     render :nothing => true
   end
 
+  def destroy_ajax
+    @vacation = Vacation.find(params[:id])
+    if @vacation.destroy
+      render :nothing => true
+    end
+  end
 
   private
     def vacation_params

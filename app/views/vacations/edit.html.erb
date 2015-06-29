@@ -13,12 +13,12 @@
 
 <%= render 'form' %>
 
-
-<%= link_to t('deliver'), new_send_mail_path(:id => params[:id]), 
-                          :class => "btn btn-warning", data: { no_turbolink: true } %>
-
-<%= link_to t('destroy'), vacation_path(), 
-                       method: :delete, data: { confirm: t('destroy_confirm'), no_turbolink: true },
-                       :class => "btn btn-danger pull-right" %>
+<ons-bottom-toolbar>
+   <div class="right"><ons-toolbar-button ng-click="deleteVacations(<%= @vacation.id %>)">削除</ons-toolbar-button></div>
+</ons-bottom-toolbar>
 
 </ons-page>
+<!--
+<%= link_to t('deliver'), new_send_mail_path(:id => params[:id]), 
+                          :class => "btn btn-warning", data: { no_turbolink: true } %>
+-->
