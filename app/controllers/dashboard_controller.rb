@@ -114,7 +114,8 @@ class DashboardController < ApplicationController
     # 結果をJSONで返す
     remain = {
       'paid_vacation_hours' => paid_vacation.hours,
-      'carryover_hours' => paid_vacation.carryover_hours,
+      'paid_vacation_carryover_hours' => paid_vacation.carryover_hours,
+      'carryover_hours' => carryover_hours,
       'carryover_hours_remain' => carryover_hours_remain,
       'vacation_total_hours' => vacation_total_hours,
       'over_hours' => over_hours,
