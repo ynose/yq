@@ -1,30 +1,32 @@
 <br>
 
 <!-- 日付 -->
-<div>
-  <label>日付</label>
-  <input class="text-input" id="date" type="date" value="<%= @vacation.start_datetime.strftime("%Y-%m-%d") %>" step="1">
-</div>
+<ons-row>
+  <ons-col align="right" size="30%"><label>日付</label>&nbsp;&nbsp;</ons-col>
+  <ons-col><input class="text-input" id="date" type="date" value="<%= @vacation.start_datetime.strftime("%Y-%m-%d") %>" step="1"></ons-col>
+</ons-row>
+<br>
 
 <!-- 開始時刻と終了時刻 -->
-<div>
-  <label>開始</label>
-  <input class="text-input" id="start_time" type="time" value="<%= @vacation.start_datetime.strftime("%H:%M") %>" step="180">
-</div>
-<div>
-  <label>終了</label>
-  <input class="text-input" id="end_time" type="time" value="<%= @vacation.end_datetime.strftime("%H:%M") %>" step="180">
-</div>
+<ons-row>
+  <ons-col align="right" size="30%"><label>時間</label>&nbsp;&nbsp;</ons-col>
+  <ons-col><input class="text-input" id="start_time" type="time" value="<%= @vacation.start_datetime.strftime("%H:%M") %>" step="180">　～
+  <input class="text-input" id="end_time" type="time" value="<%= @vacation.end_datetime.strftime("%H:%M") %>" step="180"></ons-col>
+</ons-row>
+<br>
 
 <!-- メモ -->
-<div>
-  <label>メモ</label>
-  <input class="text-input" id="memo" type="test" value="<%= @vacation.memo %>">
-</div>
+<ons-row>
+  <ons-col align="right" size="30%"><label>メモ</label>&nbsp;&nbsp;</ons-col>
+  <ons-col><input class="text-input" id="memo" type="test" value="<%= @vacation.memo %>"></ons-col>
+</ons-row>
+<br>
 
-<!-- 確定 -->
-<label>有給休暇</label>
-<ons-switch var="fixed" <%= @vacation.fixed ? "checked": "" %>></ons-switch>
+<!-- 有給休暇 -->
+<ons-row>
+  <ons-col align="right" size="30%"><label>有給休暇</label>&nbsp;&nbsp;</ons-col>
+  <ons-col><ons-switch var="fixed" <%= @vacation.fixed ? "checked": "" %>></ons-switch></ons-col>
+</ons-row>
 
 <br>
 
